@@ -90,9 +90,7 @@ class MainActivity : ComponentActivity() {
                                 startY = 300f
                             )
                         )
-                ) {
-
-                }
+                ) {}
 
                 Box(
                     modifier = Modifier
@@ -128,7 +126,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun Greeting(name: String) {
-
         // TODO 2: uncomment and move this using navigation button for first video to its own screen
 //        Column(
 //            modifier = Modifier

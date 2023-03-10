@@ -142,9 +142,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun StyleTextPreview() {
         AmalitechMakuMazakpeAssessmentTheme {
-            StyleText(
-
-            )
+            StyleText()
         }
     }
 

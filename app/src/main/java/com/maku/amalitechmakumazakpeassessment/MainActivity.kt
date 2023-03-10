@@ -1,21 +1,14 @@
 package com.maku.amalitechmakumazakpeassessment
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,12 +35,15 @@ class MainActivity : ComponentActivity() {
             AmalitechMakuMazakpeAssessmentTheme {
 //                Greeting("Maku ...")
                 // TODO 3: uncomment and move this using navigation button for first video to its own screen
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(6.dp)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp)
                 ) {
-                    ImageCard(painter = painterResource(
-                        id = R.drawable.ic_launcher_background),
+                    ImageCard(
+                        painter = painterResource(
+                            id = R.drawable.ic_launcher_background
+                        ),
                         contentDescription = "Cool card with image",
                         title = "This is Maku"
                     )
@@ -58,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ImageCard(
-         painter: Painter,
+        painter: Painter,
         contentDescription: String,
         title: String,
         modifier: Modifier = Modifier
@@ -72,7 +68,7 @@ class MainActivity : ComponentActivity() {
         ) {
             Box(
                 modifier = modifier
-                .height(200.dp)
+                    .height(200.dp)
             ) {
                 Image(
                     painter = painter,
@@ -84,34 +80,34 @@ class MainActivity : ComponentActivity() {
 
                 Box(
                     modifier = modifier
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Black
-                            ),
-                            startY = 300f
+                        .fillMaxSize()
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color.Transparent,
+                                    Color.Black
+                                ),
+                                startY = 300f
+                            )
                         )
-                    )
                 ) {
 
                 }
 
-               Box(
-                   modifier = Modifier
-                       .fillMaxSize()
-                       .padding(12.dp),
-                   contentAlignment = Alignment.BottomStart
-               ) {
-                   Text(
-                       text = title,
-                       style = TextStyle(
-                           color = Color.White,
-                           fontSize = 16.sp
-                       )
-                   )
-               }
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(12.dp),
+                    contentAlignment = Alignment.BottomStart
+                ) {
+                    Text(
+                        text = title,
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 16.sp
+                        )
+                    )
+                }
             }
         }
     }
@@ -121,7 +117,9 @@ class MainActivity : ComponentActivity() {
     fun ImageCardPreview() {
         AmalitechMakuMazakpeAssessmentTheme {
             ImageCard(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                painter = painterResource(
+                    id = R.drawable.ic_launcher_background
+                ),
                 "Cool card with image",
                 "This is Maku"
             )

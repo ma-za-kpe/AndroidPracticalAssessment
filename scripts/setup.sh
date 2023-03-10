@@ -18,7 +18,7 @@ mkdir -p ../androidassessmentamalitech-tools
 cd ../androidassessmentamalitech-tools
 
 # Download ktlint
-bash ../AndroidAssessmentAmalitech/scripts/ktlint_download.sh
+bash ../AndroidPracticalAssessment/scripts/ktlint_download.sh
 
 # Download checkstyle
-bash ../AndroidAssessmentAmalitech/scripts/checkstyle_download.sh
+bash ../AndroidPracticalAssessment/scripts/checkstyle_download.sh

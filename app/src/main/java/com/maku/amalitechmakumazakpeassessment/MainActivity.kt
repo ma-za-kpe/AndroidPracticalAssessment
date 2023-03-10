@@ -66,7 +66,10 @@ class MainActivity : ComponentActivity() {
                 text = "Maku...",
                 modifier = Modifier
                     .padding(4.dp)
-                    .offset(50.dp, 20.dp)
+                    .offset(
+                        50.dp,
+                        20.dp
+                    )
                     .border(
                         width = 4.dp,
                         color = Color.Red
@@ -77,7 +80,11 @@ class MainActivity : ComponentActivity() {
                 .height(50.dp)
                 .clickable {
                     Toast
-                        .makeText(this@MainActivity, "Maku ...", Toast.LENGTH_SHORT)
+                        .makeText(
+                            this@MainActivity,
+                            "Maku ...",
+                            Toast.LENGTH_SHORT
+                        )
                         .show()
                 })
             Text(text = "Maku...")

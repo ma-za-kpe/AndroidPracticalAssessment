@@ -76,7 +76,8 @@ class MainActivity : ComponentActivity() {
                     )
                     .padding(4.dp)
             )
-            Spacer(modifier = Modifier
+            Spacer(
+                modifier = Modifier
                 .height(50.dp)
                 .clickable {
                     Toast
@@ -86,7 +87,8 @@ class MainActivity : ComponentActivity() {
                             Toast.LENGTH_SHORT
                         )
                         .show()
-                })
+                }
+            )
             Text(text = "Maku...")
             Text(text = "Maku...")
         }

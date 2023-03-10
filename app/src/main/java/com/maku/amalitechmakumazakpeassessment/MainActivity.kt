@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -64,7 +62,8 @@ class MainActivity : ComponentActivity() {
                 )
                 .padding(4.dp)
         ) {
-            Text(text = "Maku...",
+            Text(
+                text = "Maku...",
                 modifier = Modifier
                     .padding(4.dp)
                     .offset(50.dp, 20.dp)

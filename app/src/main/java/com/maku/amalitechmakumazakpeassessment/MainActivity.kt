@@ -78,16 +78,16 @@ class MainActivity : ComponentActivity() {
             )
             Spacer(
                 modifier = Modifier
-                .height(50.dp)
-                .clickable {
-                    Toast
-                        .makeText(
-                            this@MainActivity,
-                            "Maku ...",
-                            Toast.LENGTH_SHORT
-                        )
-                        .show()
-                }
+                    .height(50.dp)
+                    .clickable {
+                        Toast
+                            .makeText(
+                                this@MainActivity,
+                                "Maku ...",
+                                Toast.LENGTH_SHORT
+                            )
+                            .show()
+                    }
             )
             Text(text = "Maku...")
             Text(text = "Maku...")

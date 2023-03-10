@@ -67,25 +67,32 @@ class MainActivity : ComponentActivity() {
     fun StyleText() {
         val fontFamily = FontFamily(
             Font(
-                R.font.dosis_bold, FontWeight.Bold
+                R.font.dosis_bold,
+                FontWeight.Bold
             ),
             Font(
-                R.font.dosis_extrabold, FontWeight.ExtraBold
+                R.font.dosis_extrabold,
+                FontWeight.ExtraBold
             ),
             Font(
-                R.font.dosis_extralight, FontWeight.ExtraLight
+                R.font.dosis_extralight,
+                FontWeight.ExtraLight
             ),
             Font(
-                R.font.dosis_light, FontWeight.Light
+                R.font.dosis_light,
+                FontWeight.Light
             ),
             Font(
-                R.font.dosis_medium, FontWeight.Medium
+                R.font.dosis_medium,
+                FontWeight.Medium
             ),
             Font(
-                R.font.dosis_regular, FontWeight.Normal
+                R.font.dosis_regular,
+                FontWeight.Normal
             ),
             Font(
-                R.font.dosis_semibold, FontWeight.SemiBold
+                R.font.dosis_semibold,
+                FontWeight.SemiBold
             )
         )
         Box(

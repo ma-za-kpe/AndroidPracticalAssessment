@@ -156,7 +156,7 @@ class MainActivity : ComponentActivity() {
                 onClick = {
                     coroutineScope.launch {
                         state.snackbarHostState.showSnackbar(
-                            "clicking $textFieldState",
+                            "clicking $textFieldState"
                         )
                     }
                 }

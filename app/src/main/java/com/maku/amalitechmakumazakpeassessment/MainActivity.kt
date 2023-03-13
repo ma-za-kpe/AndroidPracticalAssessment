@@ -151,7 +151,7 @@ class MainActivity : ComponentActivity() {
 //        }
 
         LaunchedEffect(
-            key1 = text,
+            key1 = text
         ) {
             delay(1000L)
         }

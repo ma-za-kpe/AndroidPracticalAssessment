@@ -128,11 +128,11 @@ class MainActivity : ComponentActivity() {
             modifier = modifier
                 .fillMaxSize(),
             contentPadding = PaddingValues(12.dp),
-            reverseLayout = true,
+            reverseLayout = true
         ) {
             itemsIndexed(
-                listOf(1, 2, 3, 4, 5),
-            ) {index, it ->
+                listOf(1, 2, 3, 4, 5)
+            ) { index, it ->
                 Text(
                     text = "Number $it",
                     fontSize = 20.sp,

@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -52,6 +53,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.constraintlayout.compose.Dimension
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 import kotlin.random.Random
 import kotlinx.coroutines.launch
@@ -115,8 +119,63 @@ class MainActivity : ComponentActivity() {
 //                TextFieldsInCompose()
 
                 // TODO 7: uncomment and move this using navigation button for eight video to its own screen
-                ListsInCompose()
+//                ListsInCompose()
+
+                // TODO 8: uncomment and move this using navigation button for eight video to its own screen
+                ConstraintLayoutInCompose()
             }
+        }
+    }
+
+    @Composable
+    fun ConstraintLayoutInCompose(
+        modifier: Modifier = Modifier
+    ) {
+        val set = ConstraintSet {
+            val greenBox = createRefFor("greenBox")
+            val redBox = createRefFor("redBox")
+
+            constrain(
+                greenBox
+            ) {
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+                width = Dimension.fillToConstraints
+            }
+
+            constrain(
+                redBox
+            ) {
+                top.linkTo(greenBox.bottom)
+                start.linkTo(parent.start)
+                width = Dimension.fillToConstraints
+            }
+        }
+
+        ConstraintLayout(
+            constraintSet = set,
+            modifier = modifier
+                .fillMaxSize()
+        ) {
+            Box(
+                modifier = modifier
+                    .background(Color.Green)
+                    .layoutId("greenBox")
+            )
+
+            Box(
+                modifier = modifier
+                    .background(Color.Green)
+                    .layoutId("redBox")
+            )
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun ConstraintLayoutInComposePreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            ConstraintLayoutInCompose()
         }
     }
 

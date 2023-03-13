@@ -26,6 +26,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -58,9 +59,12 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 import kotlin.random.Random
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
+    private var i = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -122,8 +126,42 @@ class MainActivity : ComponentActivity() {
 //                ListsInCompose()
 
                 // TODO 8: uncomment and move this using navigation button for eight video to its own screen
-                ConstraintLayoutInCompose()
+//                ConstraintLayoutInCompose()
+
+                // TODO 9: uncomment and move this using navigation button for eight video to its own screen
+                EffectHandlersInCompose()
             }
+        }
+    }
+
+    @Composable
+    fun EffectHandlersInCompose(
+        modifier: Modifier = Modifier
+    ) {
+        var text by remember {
+            mutableStateOf("")
+        }
+//        Button(
+//            onClick = {
+//                text += "#"
+//            }
+//        ) {
+//            i++
+//            Text(text = text)
+//        }
+
+        LaunchedEffect(
+            key1 = text,
+        ) {
+            delay(1000L)
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun EffectHandlersInComposePreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            EffectHandlersInCompose()
         }
     }
 

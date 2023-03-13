@@ -106,7 +106,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun StateInCompose(
         updateColor: (Color) -> Unit,
-        modifier: Modifier = Modifier,
+        modifier: Modifier = Modifier
     ) {
         Box(
             modifier = modifier
@@ -124,9 +124,7 @@ class MainActivity : ComponentActivity() {
                         )
                     )
                 }
-        ) {
-
-        }
+        ) {}
     }
 
     @Preview(showBackground = true)

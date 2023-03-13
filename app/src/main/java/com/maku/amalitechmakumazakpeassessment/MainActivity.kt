@@ -9,12 +9,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -109,8 +112,56 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 // TODO 6: uncomment and move this using navigation button for seventh video to its own screen
-                TextFieldsInCompose()
+//                TextFieldsInCompose()
+
+                // TODO 7: uncomment and move this using navigation button for eight video to its own screen
+                ListsInCompose()
             }
+        }
+    }
+
+    @Composable
+    fun ListsInCompose(
+        modifier: Modifier = Modifier
+    ) {
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize(),
+            contentPadding = PaddingValues(12.dp),
+            reverseLayout = true,
+        ) {
+            itemsIndexed(
+                listOf(1, 2, 3, 4, 5),
+            ) {index, it ->
+                Text(
+                    text = "Number $it",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Right,
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(6.dp)
+                )
+            }
+            items(20) {
+                Text(
+                    text = "No $it",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Right,
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(6.dp)
+                )
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun ListsInComposePreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            ListsInCompose()
         }
     }
 

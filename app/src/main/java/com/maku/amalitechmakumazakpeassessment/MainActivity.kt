@@ -156,7 +156,7 @@ class MainActivity : ComponentActivity() {
             constraintSet = set,
             modifier = modifier
                 .fillMaxSize()
-        ){
+        ) {
             Box(
                 modifier = modifier
                     .background(Color.Green)
@@ -178,7 +178,6 @@ class MainActivity : ComponentActivity() {
             ConstraintLayoutInCompose()
         }
     }
-
 
     @Composable
     fun ListsInCompose(

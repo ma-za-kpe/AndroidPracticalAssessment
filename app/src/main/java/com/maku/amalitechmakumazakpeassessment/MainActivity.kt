@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.InfiniteRepeatableSpec
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
@@ -12,8 +11,10 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -170,7 +171,7 @@ class MainActivity : ComponentActivity() {
         var infiniteTransition = rememberInfiniteTransition()
         val color by infiniteTransition.animateColor(
             initialValue = Color.Red,
-            targetValue =  Color.Cyan,
+            targetValue = Color.Cyan,
             animationSpec = infiniteRepeatable(
                 animation = tween(1000),
                 repeatMode = RepeatMode.Restart
@@ -193,22 +194,23 @@ class MainActivity : ComponentActivity() {
         Box(
             modifier = modifier
                 .size(size)
-                .background(color),
-            contentAlignment = Alignment.TopCenter
+                .border(
+                    border = BorderStroke(4.dp, color)
+                ),
+            contentAlignment = Alignment.BottomCenter
         ) {
 
-            Box(Modifier.fillMaxSize()) {
-                Icon(
-                    Icons.Filled.Favorite,
-                    contentDescription = null,
-                    modifier = Modifier.align(Alignment.Center)
-                        .graphicsLayer(
-                            scaleX = scale,
-                            scaleY = scale
-                        ),
-                    tint = color
-                )
-            }
+            Icon(
+                Icons.Filled.Favorite,
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .graphicsLayer(
+                        scaleX = scale,
+                        scaleY = scale
+                    ),
+                tint = color
+            )
             Button(
                 onClick = {
                     sizestate += 50.dp

@@ -290,7 +290,6 @@ class MainActivity : ComponentActivity() {
                 }
                 .rotate(rotation)
         )
-
     }
 
     @Composable
@@ -326,9 +325,7 @@ class MainActivity : ComponentActivity() {
     fun DragKnobInComposePreview() {
         AmalitechMakuMazakpeAssessmentTheme {
             DragKnob(
-                onValueChange = {
-
-                }
+                onValueChange = {}
             )
         }
     }

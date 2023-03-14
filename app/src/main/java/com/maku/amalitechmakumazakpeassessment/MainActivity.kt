@@ -182,7 +182,6 @@ class MainActivity : ComponentActivity() {
         animDelay: Int = 0,
         modifier: Modifier = Modifier
     ) {
-
         var animPlayed by remember {
             mutableStateOf(
                 false

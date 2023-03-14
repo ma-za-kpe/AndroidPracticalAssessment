@@ -8,10 +8,12 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -50,6 +52,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -67,6 +71,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -147,8 +153,92 @@ class MainActivity : ComponentActivity() {
 //                EffectHandlersInCompose()
 
                 // TODO 10: uncomment and move this using navigation button for eight video to its own screen
-                AnimationsInCompose()
+//                AnimationsInCompose()
+
+                // TODO 11: uncomment and move this using navigation button for eight video to its own screen
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressBarInCompose(
+                        0.8f,
+                        100
+                    )
+                }
             }
+        }
+    }
+
+    @Composable
+    fun CircularProgressBarInCompose(
+        percentage: Float,
+        value: Int,
+        fontSize: TextUnit = 20.sp,
+        radius: Dp = 50.dp,
+        color: Color = Color.Magenta,
+        strokeWidth: Dp = 8.dp,
+        animDuration: Int = 1000,
+        animDelay: Int = 0,
+        modifier: Modifier = Modifier
+    ) {
+        var animPlayed by remember {
+            mutableStateOf(
+                false
+            )
+        }
+
+        val currPercentage = animateFloatAsState(
+            targetValue = if (animPlayed) percentage else 0f,
+            animationSpec = tween(
+                durationMillis = animDuration,
+                delayMillis = animDelay
+            )
+        )
+
+        LaunchedEffect(
+            key1 = true
+        ) {
+            animPlayed = true
+        }
+
+        Box(
+            modifier = modifier
+                .size(radius * 2f),
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(
+                modifier = modifier
+                    .size(radius * 2f)
+            ) {
+                drawArc(
+                    color = color,
+                    startAngle = -90f,
+                    sweepAngle = 360 * currPercentage.value,
+                    useCenter = false,
+                    style = Stroke(
+                        strokeWidth.toPx(),
+                        cap = StrokeCap.Butt
+                    )
+                )
+            }
+            Text(
+                text = (currPercentage.value * value).toInt().toString(),
+                color = Color.Black,
+                fontSize = fontSize,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun CircularProgressBarInComposePreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            CircularProgressBarInCompose(
+                0.8f,
+                100
+            )
         }
     }
 

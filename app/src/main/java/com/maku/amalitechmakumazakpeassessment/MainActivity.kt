@@ -281,7 +281,9 @@ class MainActivity : ComponentActivity() {
                                     (fixedAngle - limitingAngle) / (360f - 2 * limitingAngle)
                                 onValueChange(percent)
                                 true
-                            } else false
+                            } else {
+                                false
+                            }
                         }
                         else -> false
                     }

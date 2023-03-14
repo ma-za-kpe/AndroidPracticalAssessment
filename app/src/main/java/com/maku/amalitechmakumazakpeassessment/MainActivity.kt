@@ -199,7 +199,6 @@ class MainActivity : ComponentActivity() {
                 ),
             contentAlignment = Alignment.BottomCenter
         ) {
-
             Icon(
                 Icons.Filled.Favorite,
                 contentDescription = null,

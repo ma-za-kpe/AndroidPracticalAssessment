@@ -1,29 +1,48 @@
 package com.maku.amalitechmakumazakpeassessment
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,12 +52,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -52,12 +82,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
+import kotlin.math.PI
+import kotlin.math.atan2
+import kotlin.math.roundToInt
 import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -129,8 +164,327 @@ class MainActivity : ComponentActivity() {
 //                ConstraintLayoutInCompose()
 
                 // TODO 9: uncomment and move this using navigation button for eight video to its own screen
-                EffectHandlersInCompose()
+//                EffectHandlersInCompose()
+
+                // TODO 10: uncomment and move this using navigation button for eight video to its own screen
+//                AnimationsInCompose()
+
+                // TODO 11: uncomment and move this using navigation button for eight video to its own screen
+//                Box(
+//                    modifier = Modifier
+//                        .fillMaxSize(),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    CircularProgressBarInCompose(
+//                        0.8f,
+//                        100
+//                    )
+//                }
+
+                // TODO 12: uncomment and move this using navigation button for eight video to its own screen
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            Color(0xFF101010)
+                        )
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .border(
+                                1.dp,
+                                Color.Green,
+                                RoundedCornerShape(
+                                    10.dp
+                                )
+                            )
+                            .padding(30.dp)
+                    ) {
+                        var volume by remember {
+                            mutableStateOf(0f)
+                        }
+                        val barCount = 20
+                        DragKnob(
+                            modifier = Modifier.size(100.dp)
+                        ) {
+                            volume = it
+                        }
+                        Spacer(
+                            modifier = Modifier.width(20.dp)
+                        )
+                        VolumeBar(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(30.dp),
+                            activeBars = (barCount * volume).roundToInt(),
+                            barCount = barCount
+                        )
+                    }
+                }
             }
+        }
+    }
+
+    @OptIn(ExperimentalComposeUiApi::class)
+    @Composable
+    fun DragKnob(
+        modifier: Modifier = Modifier,
+        limitingAngle: Float = 25f,
+        onValueChange: (Float) -> Unit
+    ) {
+        var rotation by remember {
+            mutableStateOf(limitingAngle)
+        }
+        var touchX by remember {
+            mutableStateOf(0f)
+        }
+        var touchY by remember {
+            mutableStateOf(0f)
+        }
+        var centerX by remember {
+            mutableStateOf(0f)
+        }
+        var centerY by remember {
+            mutableStateOf(0f)
+        }
+
+        Image(
+            painter = painterResource(id = R.drawable.music_knob),
+            contentDescription = "Music knob",
+            modifier = modifier
+                .fillMaxSize()
+                .onGloballyPositioned {
+                    val windowBounds = it.boundsInWindow()
+                    centerX = windowBounds.size.width / 2f
+                    centerY = windowBounds.size.height / 2f
+                }
+                .pointerInteropFilter { event ->
+                    touchX = event.x
+                    touchY = event.y
+                    val angle = -atan2(centerX - touchX, centerY - touchY) * (180f / PI).toFloat()
+
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN,
+                        MotionEvent.ACTION_MOVE -> {
+                            if (angle !in -limitingAngle..limitingAngle) {
+                                val fixedAngle = if (angle in -180f..-limitingAngle) {
+                                    360f + angle
+                                } else {
+                                    angle
+                                }
+                                rotation = fixedAngle
+
+                                val percent =
+                                    (fixedAngle - limitingAngle) / (360f - 2 * limitingAngle)
+                                onValueChange(percent)
+                                true
+                            } else {
+                                false
+                            }
+                        }
+                        else -> false
+                    }
+                }
+                .rotate(rotation)
+        )
+    }
+
+    @Composable
+    fun VolumeBar(
+        modifier: Modifier = Modifier,
+        activeBars: Int = 0,
+        barCount: Int = 10
+    ) {
+        BoxWithConstraints(
+            contentAlignment = Alignment.Center,
+            modifier = modifier
+        ) {
+            val barWidth = remember {
+                constraints.maxWidth / (2f * barCount)
+            }
+            Canvas(
+                modifier = modifier
+            ) {
+                for (i in 0 until barCount) {
+                    drawRoundRect(
+                        color = if (i in 0..activeBars) Color.Green else Color.DarkGray,
+                        topLeft = Offset(i * barWidth * 2f + barWidth / 2f, 0f),
+                        size = Size(barWidth, constraints.maxHeight.toFloat()),
+                        cornerRadius = CornerRadius(0f)
+                    )
+                }
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun DragKnobInComposePreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            DragKnob(
+                onValueChange = {}
+            )
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun VolumeBarPreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            VolumeBar()
+        }
+    }
+
+    @Composable
+    fun CircularProgressBarInCompose(
+        percentage: Float,
+        value: Int,
+        fontSize: TextUnit = 20.sp,
+        radius: Dp = 50.dp,
+        color: Color = Color.Magenta,
+        strokeWidth: Dp = 8.dp,
+        animDuration: Int = 1000,
+        animDelay: Int = 0,
+        modifier: Modifier = Modifier
+    ) {
+        var animPlayed by remember {
+            mutableStateOf(
+                false
+            )
+        }
+
+        val currPercentage = animateFloatAsState(
+            targetValue = if (animPlayed) percentage else 0f,
+            animationSpec = tween(
+                durationMillis = animDuration,
+                delayMillis = animDelay
+            )
+        )
+
+        LaunchedEffect(
+            key1 = true
+        ) {
+            animPlayed = true
+        }
+
+        Box(
+            modifier = modifier
+                .size(radius * 2f),
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(
+                modifier = modifier
+                    .size(radius * 2f)
+            ) {
+                drawArc(
+                    color = color,
+                    startAngle = -90f,
+                    sweepAngle = 360 * currPercentage.value,
+                    useCenter = false,
+                    style = Stroke(
+                        strokeWidth.toPx(),
+                        cap = StrokeCap.Butt
+                    )
+                )
+            }
+            Text(
+                text = (currPercentage.value * value).toInt().toString(),
+                color = Color.Black,
+                fontSize = fontSize,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun CircularProgressBarInComposePreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            CircularProgressBarInCompose(
+                0.8f,
+                100
+            )
+        }
+    }
+
+    @Composable
+    fun AnimationsInCompose(
+        modifier: Modifier = Modifier
+    ) {
+        var sizestate by remember {
+            mutableStateOf(200.dp)
+        }
+        val size by animateDpAsState(
+            targetValue = sizestate,
+            animationSpec = tween(
+                durationMillis = 3000,
+                delayMillis = 300,
+                easing = LinearOutSlowInEasing
+            )
+        )
+
+        var infiniteTransition = rememberInfiniteTransition()
+        val color by infiniteTransition.animateColor(
+            initialValue = Color.Red,
+            targetValue = Color.Cyan,
+            animationSpec = infiniteRepeatable(
+                animation = tween(1000),
+                repeatMode = RepeatMode.Restart
+            )
+        )
+        val scale by infiniteTransition.animateFloat(
+            initialValue = 3f,
+            targetValue = 6f,
+            animationSpec = infiniteRepeatable(
+                // Infinitely repeating a 1000ms tween animation using default easing curve.
+                animation = tween(1000),
+                // After each iteration of the animation (i.e. every 1000ms), the animation will
+                // start again from the [initialValue] defined above.
+                // This is the default [RepeatMode]. See [RepeatMode.Reverse] below for an
+                // alternative.
+                repeatMode = RepeatMode.Restart
+            )
+        )
+
+        Box(
+            modifier = modifier
+                .size(size)
+                .border(
+                    border = BorderStroke(4.dp, color)
+                ),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Icon(
+                Icons.Filled.Favorite,
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .graphicsLayer(
+                        scaleX = scale,
+                        scaleY = scale
+                    ),
+                tint = color
+            )
+            Button(
+                onClick = {
+                    sizestate += 50.dp
+                }
+            ) {
+                Text(
+                    text = "Increase size"
+                )
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun AnimationsInComposePreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            AnimationsInCompose()
         }
     }
 

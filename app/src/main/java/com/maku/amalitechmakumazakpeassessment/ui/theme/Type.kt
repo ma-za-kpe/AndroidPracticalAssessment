@@ -14,7 +14,7 @@ val gothicA1 = FontFamily(
         Font(R.font.gothica1_medium, FontWeight.Medium),
         Font(R.font.gothica1_semibold, FontWeight.SemiBold),
         Font(R.font.gothica1_bold, FontWeight.Bold),
-        Font(R.font.gothica1_black, FontWeight.Black),
+        Font(R.font.gothica1_black, FontWeight.Black)
     )
 )
 

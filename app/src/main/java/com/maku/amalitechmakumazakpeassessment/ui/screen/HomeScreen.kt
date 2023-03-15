@@ -118,7 +118,7 @@ fun HomeScreen() {
                 BottomMenuItem("Meditate", R.drawable.ic_bubble),
                 BottomMenuItem("Sleep", R.drawable.ic_moon),
                 BottomMenuItem("Music", R.drawable.ic_music),
-                BottomMenuItem("Profile", R.drawable.ic_profile),
+                BottomMenuItem("Profile", R.drawable.ic_profile)
             ),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -137,7 +137,6 @@ fun GreetingSection(
             .fillMaxWidth()
             .padding(15.dp)
     ) {
-
         Column(
             modifier = Modifier,
             verticalArrangement = Arrangement.Center
@@ -221,7 +220,6 @@ fun DailyThought(
             )
             .fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier,
             verticalArrangement = Arrangement.Center
@@ -465,7 +463,7 @@ fun BottomMenuContent(
         }
         Text(
             text = item.title,
-            color = if(isSelected) {
+            color = if (isSelected) {
                 activeTextColor
             } else {
                 inactiveTextColor

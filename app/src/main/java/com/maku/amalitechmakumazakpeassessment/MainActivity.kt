@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -89,10 +88,10 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
+import com.maku.amalitechmakumazakpeassessment.ui.screen.HomeScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 import kotlin.math.PI
 import kotlin.math.atan2
-import kotlin.math.roundToInt
 import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -182,49 +181,65 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 // TODO 12: uncomment and move this using navigation button for eight video to its own screen
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            Color(0xFF101010)
-                        )
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .border(
-                                1.dp,
-                                Color.Green,
-                                RoundedCornerShape(
-                                    10.dp
-                                )
-                            )
-                            .padding(30.dp)
-                    ) {
-                        var volume by remember {
-                            mutableStateOf(0f)
-                        }
-                        val barCount = 20
-                        DragKnob(
-                            modifier = Modifier.size(100.dp)
-                        ) {
-                            volume = it
-                        }
-                        Spacer(
-                            modifier = Modifier.width(20.dp)
-                        )
-                        VolumeBar(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(30.dp),
-                            activeBars = (barCount * volume).roundToInt(),
-                            barCount = barCount
-                        )
-                    }
-                }
+//                Box(
+//                    contentAlignment = Alignment.Center,
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .background(
+//                            Color(0xFF101010)
+//                        )
+//                ) {
+//                    Row(
+//                        horizontalArrangement = Arrangement.Center,
+//                        verticalAlignment = Alignment.CenterVertically,
+//                        modifier = Modifier
+//                            .border(
+//                                1.dp,
+//                                Color.Green,
+//                                RoundedCornerShape(
+//                                    10.dp
+//                                )
+//                            )
+//                            .padding(30.dp)
+//                    ) {
+//                        var volume by remember {
+//                            mutableStateOf(0f)
+//                        }
+//                        val barCount = 20
+//                        DragKnob(
+//                            modifier = Modifier.size(100.dp)
+//                        ) {
+//                            volume = it
+//                        }
+//                        Spacer(
+//                            modifier = Modifier.width(20.dp)
+//                        )
+//                        VolumeBar(
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .height(30.dp),
+//                            activeBars = (barCount * volume).roundToInt(),
+//                            barCount = barCount
+//                        )
+//                    }
+//                }
+
+                // TODO 14: uncomment and move this using navigation button for eight video to its own screen
+                MeditationUi()
             }
+        }
+    }
+
+    @Composable
+    fun MeditationUi() {
+        HomeScreen()
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun MeditationUiPreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            MeditationUi()
         }
     }
 

@@ -788,7 +788,8 @@ class MainActivity : ComponentActivity() {
             mutableStateOf("")
         }
         Scaffold(
-            modifier = modifier.fillMaxSize(), scaffoldState = state
+            modifier = modifier.fillMaxSize(),
+            scaffoldState = state
         ) { it ->
             Column(
                 modifier = modifier.padding(it),
@@ -804,7 +805,8 @@ class MainActivity : ComponentActivity() {
                     },
                     label = {
                         Text(text = "Name")
-                    })
+                    }
+                )
             }
 
             Spacer(
@@ -835,9 +837,11 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun StateInCompose(
-        updateColor: (Color) -> Unit, modifier: Modifier = Modifier
+        updateColor: (Color) -> Unit,
+        modifier: Modifier = Modifier
     ) {
-        Box(modifier = modifier
+        Box(
+            modifier = modifier
             .fillMaxSize()
             .background(
                 Color.Magenta
@@ -845,7 +849,10 @@ class MainActivity : ComponentActivity() {
             .clickable {
                 updateColor(
                     Color(
-                        Random.nextFloat(), Random.nextFloat(), Random.nextFloat(), 1f
+                        Random.nextFloat(),
+                        Random.nextFloat(),
+                        Random.nextFloat(),
+                        1f
                     )
                 )
             }) {}
@@ -901,7 +908,8 @@ class MainActivity : ComponentActivity() {
                         }
                         withStyle(
                             style = SpanStyle(
-                                fontWeight = FontWeight.Bold, color = Color.Cyan
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Cyan
                             )
                         ) {
                             append(".....\n")
@@ -930,11 +938,16 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ImageCard(
-        painter: Painter, contentDescription: String, title: String, modifier: Modifier = Modifier
+        painter: Painter,
+        contentDescription: String,
+        title: String,
+        modifier: Modifier = Modifier
     ) {
         // TODO 3: uncomment and move this using navigation button for first video to its own screen
         Card(
-            modifier = modifier.width(200.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
+            modifier = modifier.width(200.dp),
+            shape = RoundedCornerShape(15.dp),
+            elevation = 5.dp
         ) {
             Box(
                 modifier = modifier.height(200.dp)
@@ -952,8 +965,10 @@ class MainActivity : ComponentActivity() {
                         .background(
                             brush = Brush.verticalGradient(
                                 colors = listOf(
-                                    Color.Transparent, Color.Black
-                                ), startY = 300f
+                                    Color.Transparent,
+                                    Color.Black
+                                ),
+                                startY = 300f
                             )
                         )
                 ) {}
@@ -965,8 +980,10 @@ class MainActivity : ComponentActivity() {
                     contentAlignment = Alignment.BottomStart
                 ) {
                     Text(
-                        text = title, style = TextStyle(
-                            color = Color.White, fontSize = 16.sp
+                        text = title,
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 16.sp
                         )
                     )
                 }
@@ -981,7 +998,9 @@ class MainActivity : ComponentActivity() {
             ImageCard(
                 painter = painterResource(
                     id = R.drawable.ic_launcher_background
-                ), "Cool card with image", "This is Maku"
+                ),
+                "Cool card with image",
+                "This is Maku"
             )
         }
     }

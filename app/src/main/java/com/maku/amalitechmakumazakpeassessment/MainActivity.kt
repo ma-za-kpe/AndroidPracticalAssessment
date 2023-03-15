@@ -879,22 +879,28 @@ class MainActivity : ComponentActivity() {
             Font(
                 R.font.dosis_bold,
                 FontWeight.Bold
-            ), Font(
+            ),
+            Font(
                 R.font.dosis_extrabold,
                 FontWeight.ExtraBold
-            ), Font(
+            ),
+            Font(
                 R.font.dosis_extralight,
                 FontWeight.ExtraLight
-            ), Font(
+            ),
+            Font(
                 R.font.dosis_light,
                 FontWeight.Light
-            ), Font(
+            ),
+            Font(
                 R.font.dosis_medium,
                 FontWeight.Medium
-            ), Font(
+            ),
+            Font(
                 R.font.dosis_regular,
                 FontWeight.Normal
-            ), Font(
+            ),
+            Font(
                 R.font.dosis_semibold,
                 FontWeight.SemiBold
             )

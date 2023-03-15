@@ -557,7 +557,8 @@ class MainActivity : ComponentActivity() {
                     sweepAngle = 360 * currPercentage.value,
                     useCenter = false,
                     style = Stroke(
-                        strokeWidth.toPx(), cap = StrokeCap.Butt
+                        strokeWidth.toPx(),
+                        cap = StrokeCap.Butt
                     )
                 )
             }

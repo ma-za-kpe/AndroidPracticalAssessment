@@ -348,9 +348,15 @@ class MainActivity : ComponentActivity() {
                 )
             ) {
                 Text(
-                    text = if (isTimerRunning && currentTime >= 0L) "Stop"
-                    else if (!isTimerRunning && currentTime >= 0L) "Start"
-                    else "Restart"
+                    text = if (isTimerRunning && currentTime >= 0L) {
+                        "Stop"
+                    }
+                    else if (!isTimerRunning && currentTime >= 0L) {
+                        "Start"
+                    }
+                    else {
+                        "Restart"
+                    }
                 )
             }
         }
@@ -385,7 +391,9 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalComposeUiApi::class)
     @Composable
     fun DragKnob(
-        modifier: Modifier = Modifier, limitingAngle: Float = 25f, onValueChange: (Float) -> Unit
+        modifier: Modifier = Modifier,
+        limitingAngle: Float = 25f,
+        onValueChange: (Float) -> Unit
     ) {
         var rotation by remember {
             mutableStateOf(limitingAngle)
@@ -415,7 +423,10 @@ class MainActivity : ComponentActivity() {
                 .pointerInteropFilter { event ->
                     touchX = event.x
                     touchY = event.y
-                    val angle = -atan2(centerX - touchX, centerY - touchY) * (180f / PI).toFloat()
+                    val angle = -atan2(
+                        centerX - touchX,
+                        centerY - touchY
+                    ) * (180f / PI).toFloat()
 
                     when (event.action) {
                         MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
@@ -438,15 +449,19 @@ class MainActivity : ComponentActivity() {
                         else -> false
                     }
                 }
-                .rotate(rotation))
+                .rotate(rotation)
+        )
     }
 
     @Composable
     fun VolumeBar(
-        modifier: Modifier = Modifier, activeBars: Int = 0, barCount: Int = 10
+        modifier: Modifier = Modifier,
+        activeBars: Int = 0,
+        barCount: Int = 10
     ) {
         BoxWithConstraints(
-            contentAlignment = Alignment.Center, modifier = modifier
+            contentAlignment = Alignment.Center,
+            modifier = modifier
         ) {
             val barWidth = remember {
                 constraints.maxWidth / (2f * barCount)
@@ -456,9 +471,19 @@ class MainActivity : ComponentActivity() {
             ) {
                 for (i in 0 until barCount) {
                     drawRoundRect(
-                        color = if (i in 0..activeBars) Color.Green else Color.DarkGray,
-                        topLeft = Offset(i * barWidth * 2f + barWidth / 2f, 0f),
-                        size = Size(barWidth, constraints.maxHeight.toFloat()),
+                        color = if (i in 0..activeBars) {
+                            Color.Green
+                        } else {
+                            Color.DarkGray
+                        },
+                        topLeft = Offset(
+                            i * barWidth * 2f + barWidth / 2f,
+                            0f
+                        ),
+                        size = Size(
+                            barWidth,
+                            constraints.maxHeight.toFloat()
+                        ),
                         cornerRadius = CornerRadius(0f)
                     )
                 }
@@ -501,8 +526,14 @@ class MainActivity : ComponentActivity() {
         }
 
         val currPercentage = animateFloatAsState(
-            targetValue = if (animPlayed) percentage else 0f, animationSpec = tween(
-                durationMillis = animDuration, delayMillis = animDelay
+            targetValue = if (animPlayed) {
+                percentage
+            } else {
+                0f
+            },
+            animationSpec = tween(
+                durationMillis = animDuration,
+                delayMillis = animDelay
             )
         )
 
@@ -513,7 +544,8 @@ class MainActivity : ComponentActivity() {
         }
 
         Box(
-            modifier = modifier.size(radius * 2f), contentAlignment = Alignment.Center
+            modifier = modifier.size(radius * 2f),
+            contentAlignment = Alignment.Center
         ) {
             Canvas(
                 modifier = modifier.size(radius * 2f)
@@ -555,19 +587,27 @@ class MainActivity : ComponentActivity() {
             mutableStateOf(200.dp)
         }
         val size by animateDpAsState(
-            targetValue = sizestate, animationSpec = tween(
-                durationMillis = 3000, delayMillis = 300, easing = LinearOutSlowInEasing
+            targetValue = sizestate,
+            animationSpec = tween(
+                durationMillis = 3000,
+                delayMillis = 300,
+                easing = LinearOutSlowInEasing
             )
         )
 
         var infiniteTransition = rememberInfiniteTransition()
         val color by infiniteTransition.animateColor(
-            initialValue = Color.Red, targetValue = Color.Cyan, animationSpec = infiniteRepeatable(
-                animation = tween(1000), repeatMode = RepeatMode.Restart
+            initialValue = Color.Red,
+            targetValue = Color.Cyan,
+            animationSpec = infiniteRepeatable(
+                animation = tween(1000),
+                repeatMode = RepeatMode.Restart
             )
         )
         val scale by infiniteTransition.animateFloat(
-            initialValue = 3f, targetValue = 6f, animationSpec = infiniteRepeatable(
+            initialValue = 3f,
+            targetValue = 6f,
+            animationSpec = infiniteRepeatable(
                 // Infinitely repeating a 1000ms tween animation using default easing curve.
                 animation = tween(1000),
                 // After each iteration of the animation (i.e. every 1000ms), the animation will

@@ -35,9 +35,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
@@ -59,6 +61,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
@@ -68,6 +71,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -82,6 +86,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -92,6 +97,8 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.HomeScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 import kotlin.math.PI
 import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
 import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -225,8 +232,140 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 // TODO 14: uncomment and move this using navigation button for eight video to its own screen
-                MeditationUi()
+//                MeditationUi()
+
+                // TODO 15: uncomment and move this using navigation button for eight video to its own screen
+                Surface(
+                    color = Color(0xFF101010),
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    Box(
+                        contentAlignment = Alignment.Center
+                    ) {
+                        TimerUi(
+                            100L * 1000L,
+                            Color.Green,
+                            Color.DarkGray,
+                            Color(0xFF37B900),
+                            modifier = Modifier
+                                .size(200.dp)
+                        )
+                    }
+                }
             }
+        }
+    }
+
+    @Composable
+    fun TimerUi(
+        totalTime: Long,
+        handleColor: Color,
+        inActiveBarColor: Color,
+        activeBarColor: Color,
+        modifier: Modifier = Modifier,
+        initialValue: Float = 1f,
+        strokeWidth: Dp = 5.dp
+    ) {
+        var size by remember {
+            mutableStateOf(IntSize.Zero)
+        }
+        var value by remember {
+            mutableStateOf(initialValue)
+        }
+        var currentTime by remember {
+            mutableStateOf(totalTime)
+        }
+        var isTimerRunning by remember {
+            mutableStateOf(false)
+        }
+        LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
+            if (currentTime > 0 && isTimerRunning) {
+                delay(100L)
+                currentTime -= 100L
+                value = currentTime / totalTime.toFloat()
+            }
+        }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = modifier
+                .onSizeChanged {
+                    size = it
+                }
+        ) {
+            Canvas(modifier = modifier) {
+                drawArc(
+                    color = inActiveBarColor,
+                    startAngle = -215f,
+                    sweepAngle = 250f,
+                    useCenter = false,
+                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+                )
+                drawArc(
+                    color = activeBarColor,
+                    startAngle = -215f,
+                    sweepAngle = 250f * value,
+                    useCenter = false,
+                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+                )
+                val center = Offset(size.width / 2f, size.height / 2f)
+                val beta = (250f * value + 145f) * (PI / 180f).toFloat()
+                val r = size.width / 2f
+                val a = cos(beta) * r
+                val b = sin(beta) * r
+                drawPoints(
+                    listOf(Offset(center.x + a, center.y + b)),
+                    pointMode = PointMode.Points,
+                    color = handleColor,
+                    strokeWidth = (strokeWidth * 3f).toPx(),
+                    cap = StrokeCap.Round
+                )
+            }
+            Text(
+                text = (currentTime / 1000L).toString(),
+                fontSize = 44.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Button(
+                onClick = {
+                    if (currentTime <= 0L) {
+                        currentTime = totalTime
+                        isTimerRunning = true
+                    } else {
+                        isTimerRunning = !isTimerRunning
+                    }
+                },
+                modifier = Modifier.align(Alignment.BottomCenter),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = if (!isTimerRunning || currentTime <= 0L) {
+                        Color.Green
+                    } else {
+                        Color.Red
+                    }
+                )
+            ) {
+                Text(
+                    text = if (isTimerRunning && currentTime >= 0L) "Stop"
+                    else if (!isTimerRunning && currentTime >= 0L) "Start"
+                    else "Restart"
+                )
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun TimerUiPreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            TimerUi(
+                3000L,
+                Color.Gray,
+                Color.Yellow,
+                Color.Green
+            )
         }
     }
 
@@ -246,9 +385,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalComposeUiApi::class)
     @Composable
     fun DragKnob(
-        modifier: Modifier = Modifier,
-        limitingAngle: Float = 25f,
-        onValueChange: (Float) -> Unit
+        modifier: Modifier = Modifier, limitingAngle: Float = 25f, onValueChange: (Float) -> Unit
     ) {
         var rotation by remember {
             mutableStateOf(limitingAngle)
@@ -266,8 +403,7 @@ class MainActivity : ComponentActivity() {
             mutableStateOf(0f)
         }
 
-        Image(
-            painter = painterResource(id = R.drawable.music_knob),
+        Image(painter = painterResource(id = R.drawable.music_knob),
             contentDescription = "Music knob",
             modifier = modifier
                 .fillMaxSize()
@@ -282,8 +418,7 @@ class MainActivity : ComponentActivity() {
                     val angle = -atan2(centerX - touchX, centerY - touchY) * (180f / PI).toFloat()
 
                     when (event.action) {
-                        MotionEvent.ACTION_DOWN,
-                        MotionEvent.ACTION_MOVE -> {
+                        MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                             if (angle !in -limitingAngle..limitingAngle) {
                                 val fixedAngle = if (angle in -180f..-limitingAngle) {
                                     360f + angle
@@ -303,19 +438,15 @@ class MainActivity : ComponentActivity() {
                         else -> false
                     }
                 }
-                .rotate(rotation)
-        )
+                .rotate(rotation))
     }
 
     @Composable
     fun VolumeBar(
-        modifier: Modifier = Modifier,
-        activeBars: Int = 0,
-        barCount: Int = 10
+        modifier: Modifier = Modifier, activeBars: Int = 0, barCount: Int = 10
     ) {
         BoxWithConstraints(
-            contentAlignment = Alignment.Center,
-            modifier = modifier
+            contentAlignment = Alignment.Center, modifier = modifier
         ) {
             val barWidth = remember {
                 constraints.maxWidth / (2f * barCount)
@@ -339,9 +470,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun DragKnobInComposePreview() {
         AmalitechMakuMazakpeAssessmentTheme {
-            DragKnob(
-                onValueChange = {}
-            )
+            DragKnob(onValueChange = {})
         }
     }
 
@@ -372,10 +501,8 @@ class MainActivity : ComponentActivity() {
         }
 
         val currPercentage = animateFloatAsState(
-            targetValue = if (animPlayed) percentage else 0f,
-            animationSpec = tween(
-                durationMillis = animDuration,
-                delayMillis = animDelay
+            targetValue = if (animPlayed) percentage else 0f, animationSpec = tween(
+                durationMillis = animDuration, delayMillis = animDelay
             )
         )
 
@@ -386,13 +513,10 @@ class MainActivity : ComponentActivity() {
         }
 
         Box(
-            modifier = modifier
-                .size(radius * 2f),
-            contentAlignment = Alignment.Center
+            modifier = modifier.size(radius * 2f), contentAlignment = Alignment.Center
         ) {
             Canvas(
-                modifier = modifier
-                    .size(radius * 2f)
+                modifier = modifier.size(radius * 2f)
             ) {
                 drawArc(
                     color = color,
@@ -400,8 +524,7 @@ class MainActivity : ComponentActivity() {
                     sweepAngle = 360 * currPercentage.value,
                     useCenter = false,
                     style = Stroke(
-                        strokeWidth.toPx(),
-                        cap = StrokeCap.Butt
+                        strokeWidth.toPx(), cap = StrokeCap.Butt
                     )
                 )
             }
@@ -419,8 +542,7 @@ class MainActivity : ComponentActivity() {
     fun CircularProgressBarInComposePreview() {
         AmalitechMakuMazakpeAssessmentTheme {
             CircularProgressBarInCompose(
-                0.8f,
-                100
+                0.8f, 100
             )
         }
     }
@@ -433,27 +555,19 @@ class MainActivity : ComponentActivity() {
             mutableStateOf(200.dp)
         }
         val size by animateDpAsState(
-            targetValue = sizestate,
-            animationSpec = tween(
-                durationMillis = 3000,
-                delayMillis = 300,
-                easing = LinearOutSlowInEasing
+            targetValue = sizestate, animationSpec = tween(
+                durationMillis = 3000, delayMillis = 300, easing = LinearOutSlowInEasing
             )
         )
 
         var infiniteTransition = rememberInfiniteTransition()
         val color by infiniteTransition.animateColor(
-            initialValue = Color.Red,
-            targetValue = Color.Cyan,
-            animationSpec = infiniteRepeatable(
-                animation = tween(1000),
-                repeatMode = RepeatMode.Restart
+            initialValue = Color.Red, targetValue = Color.Cyan, animationSpec = infiniteRepeatable(
+                animation = tween(1000), repeatMode = RepeatMode.Restart
             )
         )
         val scale by infiniteTransition.animateFloat(
-            initialValue = 3f,
-            targetValue = 6f,
-            animationSpec = infiniteRepeatable(
+            initialValue = 3f, targetValue = 6f, animationSpec = infiniteRepeatable(
                 // Infinitely repeating a 1000ms tween animation using default easing curve.
                 animation = tween(1000),
                 // After each iteration of the animation (i.e. every 1000ms), the animation will
@@ -469,8 +583,7 @@ class MainActivity : ComponentActivity() {
                 .size(size)
                 .border(
                     border = BorderStroke(4.dp, color)
-                ),
-            contentAlignment = Alignment.BottomCenter
+                ), contentAlignment = Alignment.BottomCenter
         ) {
             Icon(
                 Icons.Filled.Favorite,
@@ -478,16 +591,13 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .align(Alignment.Center)
                     .graphicsLayer(
-                        scaleX = scale,
-                        scaleY = scale
+                        scaleX = scale, scaleY = scale
                     ),
                 tint = color
             )
-            Button(
-                onClick = {
-                    sizestate += 50.dp
-                }
-            ) {
+            Button(onClick = {
+                sizestate += 50.dp
+            }) {
                 Text(
                     text = "Increase size"
                 )
@@ -560,9 +670,7 @@ class MainActivity : ComponentActivity() {
         }
 
         ConstraintLayout(
-            constraintSet = set,
-            modifier = modifier
-                .fillMaxSize()
+            constraintSet = set, modifier = modifier.fillMaxSize()
         ) {
             Box(
                 modifier = modifier
@@ -591,8 +699,7 @@ class MainActivity : ComponentActivity() {
         modifier: Modifier = Modifier
     ) {
         LazyColumn(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(12.dp),
             reverseLayout = true
         ) {
@@ -641,18 +748,14 @@ class MainActivity : ComponentActivity() {
             mutableStateOf("")
         }
         Scaffold(
-            modifier = modifier
-                .fillMaxSize(),
-            scaffoldState = state
+            modifier = modifier.fillMaxSize(), scaffoldState = state
         ) { it ->
             Column(
-                modifier = modifier
-                    .padding(it),
+                modifier = modifier.padding(it),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                TextField(
-                    value = textFieldState,
+                TextField(value = textFieldState,
                     modifier = modifier
                         .fillMaxWidth()
                         .padding(8.dp),
@@ -661,23 +764,20 @@ class MainActivity : ComponentActivity() {
                     },
                     label = {
                         Text(text = "Name")
-                    }
-                )
+                    })
             }
 
             Spacer(
                 modifier = modifier.padding(16.dp)
             )
 
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        state.snackbarHostState.showSnackbar(
-                            "clicking $textFieldState"
-                        )
-                    }
+            Button(onClick = {
+                coroutineScope.launch {
+                    state.snackbarHostState.showSnackbar(
+                        "clicking $textFieldState"
+                    )
                 }
-            ) {
+            }) {
                 Text(
                     text = "Click Me"
                 )
@@ -695,26 +795,20 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun StateInCompose(
-        updateColor: (Color) -> Unit,
-        modifier: Modifier = Modifier
+        updateColor: (Color) -> Unit, modifier: Modifier = Modifier
     ) {
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .background(
-                    Color.Magenta
-                )
-                .clickable {
-                    updateColor(
-                        Color(
-                            Random.nextFloat(),
-                            Random.nextFloat(),
-                            Random.nextFloat(),
-                            1f
-                        )
+        Box(modifier = modifier
+            .fillMaxSize()
+            .background(
+                Color.Magenta
+            )
+            .clickable {
+                updateColor(
+                    Color(
+                        Random.nextFloat(), Random.nextFloat(), Random.nextFloat(), 1f
                     )
-                }
-        ) {}
+                )
+            }) {}
     }
 
     @Preview(showBackground = true)
@@ -729,32 +823,19 @@ class MainActivity : ComponentActivity() {
     fun StyleText() {
         val fontFamily = FontFamily(
             Font(
-                R.font.dosis_bold,
-                FontWeight.Bold
-            ),
-            Font(
-                R.font.dosis_extrabold,
-                FontWeight.ExtraBold
-            ),
-            Font(
-                R.font.dosis_extralight,
-                FontWeight.ExtraLight
-            ),
-            Font(
-                R.font.dosis_light,
-                FontWeight.Light
-            ),
-            Font(
-                R.font.dosis_medium,
-                FontWeight.Medium
-            ),
-            Font(
-                R.font.dosis_regular,
-                FontWeight.Normal
-            ),
-            Font(
-                R.font.dosis_semibold,
-                FontWeight.SemiBold
+                R.font.dosis_bold, FontWeight.Bold
+            ), Font(
+                R.font.dosis_extrabold, FontWeight.ExtraBold
+            ), Font(
+                R.font.dosis_extralight, FontWeight.ExtraLight
+            ), Font(
+                R.font.dosis_light, FontWeight.Light
+            ), Font(
+                R.font.dosis_medium, FontWeight.Medium
+            ), Font(
+                R.font.dosis_regular, FontWeight.Normal
+            ), Font(
+                R.font.dosis_semibold, FontWeight.SemiBold
             )
         )
         Box(
@@ -780,8 +861,7 @@ class MainActivity : ComponentActivity() {
                         }
                         withStyle(
                             style = SpanStyle(
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Cyan
+                                fontWeight = FontWeight.Bold, color = Color.Cyan
                             )
                         ) {
                             append(".....\n")
@@ -810,27 +890,19 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ImageCard(
-        painter: Painter,
-        contentDescription: String,
-        title: String,
-        modifier: Modifier = Modifier
+        painter: Painter, contentDescription: String, title: String, modifier: Modifier = Modifier
     ) {
         // TODO 3: uncomment and move this using navigation button for first video to its own screen
         Card(
-            modifier = modifier
-                .width(200.dp),
-            shape = RoundedCornerShape(15.dp),
-            elevation = 5.dp
+            modifier = modifier.width(200.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
         ) {
             Box(
-                modifier = modifier
-                    .height(200.dp)
+                modifier = modifier.height(200.dp)
             ) {
                 Image(
                     painter = painter,
                     contentDescription = contentDescription,
-                    modifier = modifier
-                        .fillMaxSize(),
+                    modifier = modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit
                 )
 
@@ -840,10 +912,8 @@ class MainActivity : ComponentActivity() {
                         .background(
                             brush = Brush.verticalGradient(
                                 colors = listOf(
-                                    Color.Transparent,
-                                    Color.Black
-                                ),
-                                startY = 300f
+                                    Color.Transparent, Color.Black
+                                ), startY = 300f
                             )
                         )
                 ) {}
@@ -855,10 +925,8 @@ class MainActivity : ComponentActivity() {
                     contentAlignment = Alignment.BottomStart
                 ) {
                     Text(
-                        text = title,
-                        style = TextStyle(
-                            color = Color.White,
-                            fontSize = 16.sp
+                        text = title, style = TextStyle(
+                            color = Color.White, fontSize = 16.sp
                         )
                     )
                 }
@@ -873,9 +941,7 @@ class MainActivity : ComponentActivity() {
             ImageCard(
                 painter = painterResource(
                     id = R.drawable.ic_launcher_background
-                ),
-                "Cool card with image",
-                "This is Maku"
+                ), "Cool card with image", "This is Maku"
             )
         }
     }

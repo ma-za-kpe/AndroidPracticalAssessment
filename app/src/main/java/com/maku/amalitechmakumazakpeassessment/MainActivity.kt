@@ -350,11 +350,9 @@ class MainActivity : ComponentActivity() {
                 Text(
                     text = if (isTimerRunning && currentTime >= 0L) {
                         "Stop"
-                    }
-                    else if (!isTimerRunning && currentTime >= 0L) {
+                    } else if (!isTimerRunning && currentTime >= 0L) {
                         "Start"
-                    }
-                    else {
+                    } else {
                         "Restart"
                     }
                 )
@@ -411,7 +409,10 @@ class MainActivity : ComponentActivity() {
             mutableStateOf(0f)
         }
 
-        Image(painter = painterResource(id = R.drawable.music_knob),
+        Image(
+            painter = painterResource(
+                id = R.drawable.music_knob
+            ),
             contentDescription = "Music knob",
             modifier = modifier
                 .fillMaxSize()
@@ -574,7 +575,8 @@ class MainActivity : ComponentActivity() {
     fun CircularProgressBarInComposePreview() {
         AmalitechMakuMazakpeAssessmentTheme {
             CircularProgressBarInCompose(
-                0.8f, 100
+                0.8f,
+                100
             )
         }
     }
@@ -623,7 +625,8 @@ class MainActivity : ComponentActivity() {
                 .size(size)
                 .border(
                     border = BorderStroke(4.dp, color)
-                ), contentAlignment = Alignment.BottomCenter
+                ),
+            contentAlignment = Alignment.BottomCenter
         ) {
             Icon(
                 Icons.Filled.Favorite,
@@ -631,7 +634,8 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .align(Alignment.Center)
                     .graphicsLayer(
-                        scaleX = scale, scaleY = scale
+                        scaleX = scale,
+                        scaleY = scale
                     ),
                 tint = color
             )
@@ -710,7 +714,8 @@ class MainActivity : ComponentActivity() {
         }
 
         ConstraintLayout(
-            constraintSet = set, modifier = modifier.fillMaxSize()
+            constraintSet = set,
+            modifier = modifier.fillMaxSize()
         ) {
             Box(
                 modifier = modifier
@@ -796,7 +801,8 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                TextField(value = textFieldState,
+                TextField(
+                    value = textFieldState,
                     modifier = modifier
                         .fillMaxWidth()
                         .padding(8.dp),
@@ -842,20 +848,21 @@ class MainActivity : ComponentActivity() {
     ) {
         Box(
             modifier = modifier
-            .fillMaxSize()
-            .background(
-                Color.Magenta
-            )
-            .clickable {
-                updateColor(
-                    Color(
-                        Random.nextFloat(),
-                        Random.nextFloat(),
-                        Random.nextFloat(),
-                        1f
-                    )
+                .fillMaxSize()
+                .background(
+                    Color.Magenta
                 )
-            }) {}
+                .clickable {
+                    updateColor(
+                        Color(
+                            Random.nextFloat(),
+                            Random.nextFloat(),
+                            Random.nextFloat(),
+                            1f
+                        )
+                    )
+                }
+        )
     }
 
     @Preview(showBackground = true)
@@ -870,19 +877,26 @@ class MainActivity : ComponentActivity() {
     fun StyleText() {
         val fontFamily = FontFamily(
             Font(
-                R.font.dosis_bold, FontWeight.Bold
+                R.font.dosis_bold,
+                FontWeight.Bold
             ), Font(
-                R.font.dosis_extrabold, FontWeight.ExtraBold
+                R.font.dosis_extrabold,
+                FontWeight.ExtraBold
             ), Font(
-                R.font.dosis_extralight, FontWeight.ExtraLight
+                R.font.dosis_extralight,
+                FontWeight.ExtraLight
             ), Font(
-                R.font.dosis_light, FontWeight.Light
+                R.font.dosis_light,
+                FontWeight.Light
             ), Font(
-                R.font.dosis_medium, FontWeight.Medium
+                R.font.dosis_medium,
+                FontWeight.Medium
             ), Font(
-                R.font.dosis_regular, FontWeight.Normal
+                R.font.dosis_regular,
+                FontWeight.Normal
             ), Font(
-                R.font.dosis_semibold, FontWeight.SemiBold
+                R.font.dosis_semibold,
+                FontWeight.SemiBold
             )
         )
         Box(

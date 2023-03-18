@@ -40,7 +40,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
@@ -100,6 +99,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.maku.amalitechmakumazakpeassessment.ui.screen.HomeScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.insta.ProfileScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -261,30 +261,45 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 // TODO 15: uncomment and move this using navigation button for animated drop down video to its own screen
+//                Surface(
+//                    color = Color(0xFF101010),
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                ) {
+//                    AnimatedDropDown(
+//                        modifier = Modifier
+//                            .padding(15.dp),
+//                        "Hello Maku"
+//                    ) {
+//                        Text(
+//                            text = "Awesome animation revealed!",
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .height(100.dp)
+//                                .background(Color.Magenta),
+//                            fontSize = 16.sp,
+//                            fontWeight = FontWeight.Bold,
+//                            color = Color.White
+//                        )
+//                    }
+//                }
 
-                Surface(
-                    color = Color(0xFF101010),
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    AnimatedDropDown(
-                        modifier = Modifier
-                            .padding(15.dp),
-                        "Hello Maku"
-                    ) {
-                        Text(
-                            text = "Awesome animation revealed!",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(100.dp)
-                                .background(Color.Magenta),
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                    }
-                }
+                // TODO 16: uncomment and move this using navigation button for insta video to its own screen
+                InstagramUiInCompose()
             }
+        }
+    }
+
+    @Composable
+    fun InstagramUiInCompose() {
+        ProfileScreen()
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun InstagramUiInComposeUiPreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            InstagramUiInCompose()
         }
     }
 

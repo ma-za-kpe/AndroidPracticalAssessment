@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,7 +44,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -55,7 +58,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -63,6 +68,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
@@ -235,25 +241,157 @@ class MainActivity : ComponentActivity() {
 //                MeditationUi()
 
                 // TODO 15: uncomment and move this using navigation button for eight video to its own screen
+//                Surface(
+//                    color = Color(0xFF101010),
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                ) {
+//                    Box(
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        TimerUi(
+//                            100L * 1000L,
+//                            Color.Green,
+//                            Color.DarkGray,
+//                            Color(0xFF37B900),
+//                            modifier = Modifier
+//                                .size(200.dp)
+//                        )
+//                    }
+//                }
+
+                // TODO 15: uncomment and move this using navigation button for animated drop down video to its own screen
+
                 Surface(
                     color = Color(0xFF101010),
                     modifier = Modifier
                         .fillMaxSize()
                 ) {
-                    Box(
-                        contentAlignment = Alignment.Center
+                    AnimatedDropDown(
+                        modifier = Modifier
+                            .padding(15.dp),
+                        "Hello Maku"
                     ) {
-                        TimerUi(
-                            100L * 1000L,
-                            Color.Green,
-                            Color.DarkGray,
-                            Color(0xFF37B900),
+                        Text(
+                            text = "Awesome animation revealed!",
                             modifier = Modifier
-                                .size(200.dp)
+                                .fillMaxWidth()
+                                .height(100.dp)
+                                .background(Color.Magenta),
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
                     }
                 }
             }
+        }
+    }
+
+    @Composable
+    fun AnimatedDropDown(
+        modifier: Modifier = Modifier,
+        textString: String = "Hello",
+        iniatiallyOpened: Boolean = false,
+        content: @Composable () -> Unit
+    ) {
+        var isOpen by remember {
+            mutableStateOf(iniatiallyOpened)
+        }
+
+        val alpha = animateFloatAsState(
+            targetValue = if (isOpen) {
+                1f
+            } else {
+                0f
+            },
+            animationSpec = tween(
+                durationMillis = 300
+            )
+        )
+
+        val rotateX = animateFloatAsState(
+            targetValue = if (isOpen) {
+                0f
+            } else {
+                -90f
+            },
+            animationSpec = tween(
+                durationMillis = 300
+            )
+        )
+
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = modifier
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = textString,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+
+                Icon(
+                    imageVector = if (isOpen) {
+                        Icons.Filled.KeyboardArrowUp
+                    } else {
+                        Icons.Filled.ArrowDropDown
+                    },
+                    contentDescription = "open / close dropdown",
+                    tint = Color.White,
+                    modifier = modifier
+                        .clickable {
+                            isOpen = !isOpen
+                        }
+                        .scale(
+                            1f,
+                            if (isOpen) {
+                                -1f
+                            } else {
+                                1f
+                            }
+                        )
+                )
+            }
+
+            Spacer(
+                modifier = modifier
+                    .height(10.dp)
+            )
+
+            Box(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .graphicsLayer {
+                        transformOrigin = TransformOrigin(
+                            0.5f,
+                            0f
+                        )
+                        rotationX = rotateX.value
+                    }
+                    .alpha(
+                        alpha.value
+                    )
+            ) {
+                content()
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun AnimatedDropDownUiPreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            AnimatedDropDown(
+                content = {}
+            )
         }
     }
 

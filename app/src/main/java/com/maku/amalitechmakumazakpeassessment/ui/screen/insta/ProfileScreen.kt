@@ -212,8 +212,8 @@ fun ProfileSection(
         }
         ProfileDescription(
             name = "Programming Bear",
-            description = "5 years of coding experience\n" +
-                    "Want me to make your app? Send me an email!\n" +
+            description = "5 years of coding experience" +
+                    " Want me to make your app? Send me an email! " +
                     "Subscribe to my YouTube channel!",
             url = "https://youtube.com/c/makpalyy",
             followers = listOf("doctor", "miakhalifa"),

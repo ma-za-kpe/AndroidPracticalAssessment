@@ -270,7 +270,7 @@ class MainActivity : ComponentActivity() {
                     AnimatedDropDown(
                         modifier = Modifier
                             .padding(15.dp),
-                        "Hello Maku",
+                        "Hello Maku"
                     ) {
                         Text(
                             text = "Awesome animation revealed!",
@@ -383,7 +383,6 @@ class MainActivity : ComponentActivity() {
                 content()
             }
         }
-
     }
 
     @Preview(showBackground = true)

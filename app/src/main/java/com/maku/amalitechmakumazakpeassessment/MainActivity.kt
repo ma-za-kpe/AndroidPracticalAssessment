@@ -35,9 +35,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
@@ -59,6 +61,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
@@ -68,6 +71,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -82,6 +86,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -92,6 +97,8 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.HomeScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 import kotlin.math.PI
 import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
 import kotlin.random.Random
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -225,8 +232,144 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 // TODO 14: uncomment and move this using navigation button for eight video to its own screen
-                MeditationUi()
+//                MeditationUi()
+
+                // TODO 15: uncomment and move this using navigation button for eight video to its own screen
+                Surface(
+                    color = Color(0xFF101010),
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    Box(
+                        contentAlignment = Alignment.Center
+                    ) {
+                        TimerUi(
+                            100L * 1000L,
+                            Color.Green,
+                            Color.DarkGray,
+                            Color(0xFF37B900),
+                            modifier = Modifier
+                                .size(200.dp)
+                        )
+                    }
+                }
             }
+        }
+    }
+
+    @Composable
+    fun TimerUi(
+        totalTime: Long,
+        handleColor: Color,
+        inActiveBarColor: Color,
+        activeBarColor: Color,
+        modifier: Modifier = Modifier,
+        initialValue: Float = 1f,
+        strokeWidth: Dp = 5.dp
+    ) {
+        var size by remember {
+            mutableStateOf(IntSize.Zero)
+        }
+        var value by remember {
+            mutableStateOf(initialValue)
+        }
+        var currentTime by remember {
+            mutableStateOf(totalTime)
+        }
+        var isTimerRunning by remember {
+            mutableStateOf(false)
+        }
+        LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
+            if (currentTime > 0 && isTimerRunning) {
+                delay(100L)
+                currentTime -= 100L
+                value = currentTime / totalTime.toFloat()
+            }
+        }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = modifier
+                .onSizeChanged {
+                    size = it
+                }
+        ) {
+            Canvas(modifier = modifier) {
+                drawArc(
+                    color = inActiveBarColor,
+                    startAngle = -215f,
+                    sweepAngle = 250f,
+                    useCenter = false,
+                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+                )
+                drawArc(
+                    color = activeBarColor,
+                    startAngle = -215f,
+                    sweepAngle = 250f * value,
+                    useCenter = false,
+                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+                )
+                val center = Offset(size.width / 2f, size.height / 2f)
+                val beta = (250f * value + 145f) * (PI / 180f).toFloat()
+                val r = size.width / 2f
+                val a = cos(beta) * r
+                val b = sin(beta) * r
+                drawPoints(
+                    listOf(Offset(center.x + a, center.y + b)),
+                    pointMode = PointMode.Points,
+                    color = handleColor,
+                    strokeWidth = (strokeWidth * 3f).toPx(),
+                    cap = StrokeCap.Round
+                )
+            }
+            Text(
+                text = (currentTime / 1000L).toString(),
+                fontSize = 44.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Button(
+                onClick = {
+                    if (currentTime <= 0L) {
+                        currentTime = totalTime
+                        isTimerRunning = true
+                    } else {
+                        isTimerRunning = !isTimerRunning
+                    }
+                },
+                modifier = Modifier.align(Alignment.BottomCenter),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = if (!isTimerRunning || currentTime <= 0L) {
+                        Color.Green
+                    } else {
+                        Color.Red
+                    }
+                )
+            ) {
+                Text(
+                    text = if (isTimerRunning && currentTime >= 0L) {
+                        "Stop"
+                    } else if (!isTimerRunning && currentTime >= 0L) {
+                        "Start"
+                    } else {
+                        "Restart"
+                    }
+                )
+            }
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun TimerUiPreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            TimerUi(
+                3000L,
+                Color.Gray,
+                Color.Yellow,
+                Color.Green
+            )
         }
     }
 
@@ -267,7 +410,9 @@ class MainActivity : ComponentActivity() {
         }
 
         Image(
-            painter = painterResource(id = R.drawable.music_knob),
+            painter = painterResource(
+                id = R.drawable.music_knob
+            ),
             contentDescription = "Music knob",
             modifier = modifier
                 .fillMaxSize()
@@ -279,11 +424,13 @@ class MainActivity : ComponentActivity() {
                 .pointerInteropFilter { event ->
                     touchX = event.x
                     touchY = event.y
-                    val angle = -atan2(centerX - touchX, centerY - touchY) * (180f / PI).toFloat()
+                    val angle = -atan2(
+                        centerX - touchX,
+                        centerY - touchY
+                    ) * (180f / PI).toFloat()
 
                     when (event.action) {
-                        MotionEvent.ACTION_DOWN,
-                        MotionEvent.ACTION_MOVE -> {
+                        MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                             if (angle !in -limitingAngle..limitingAngle) {
                                 val fixedAngle = if (angle in -180f..-limitingAngle) {
                                     360f + angle
@@ -325,9 +472,19 @@ class MainActivity : ComponentActivity() {
             ) {
                 for (i in 0 until barCount) {
                     drawRoundRect(
-                        color = if (i in 0..activeBars) Color.Green else Color.DarkGray,
-                        topLeft = Offset(i * barWidth * 2f + barWidth / 2f, 0f),
-                        size = Size(barWidth, constraints.maxHeight.toFloat()),
+                        color = if (i in 0..activeBars) {
+                            Color.Green
+                        } else {
+                            Color.DarkGray
+                        },
+                        topLeft = Offset(
+                            i * barWidth * 2f + barWidth / 2f,
+                            0f
+                        ),
+                        size = Size(
+                            barWidth,
+                            constraints.maxHeight.toFloat()
+                        ),
                         cornerRadius = CornerRadius(0f)
                     )
                 }
@@ -339,9 +496,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun DragKnobInComposePreview() {
         AmalitechMakuMazakpeAssessmentTheme {
-            DragKnob(
-                onValueChange = {}
-            )
+            DragKnob(onValueChange = {})
         }
     }
 
@@ -372,7 +527,11 @@ class MainActivity : ComponentActivity() {
         }
 
         val currPercentage = animateFloatAsState(
-            targetValue = if (animPlayed) percentage else 0f,
+            targetValue = if (animPlayed) {
+                percentage
+            } else {
+                0f
+            },
             animationSpec = tween(
                 durationMillis = animDuration,
                 delayMillis = animDelay
@@ -386,13 +545,11 @@ class MainActivity : ComponentActivity() {
         }
 
         Box(
-            modifier = modifier
-                .size(radius * 2f),
+            modifier = modifier.size(radius * 2f),
             contentAlignment = Alignment.Center
         ) {
             Canvas(
-                modifier = modifier
-                    .size(radius * 2f)
+                modifier = modifier.size(radius * 2f)
             ) {
                 drawArc(
                     color = color,
@@ -483,11 +640,9 @@ class MainActivity : ComponentActivity() {
                     ),
                 tint = color
             )
-            Button(
-                onClick = {
-                    sizestate += 50.dp
-                }
-            ) {
+            Button(onClick = {
+                sizestate += 50.dp
+            }) {
                 Text(
                     text = "Increase size"
                 )
@@ -561,8 +716,7 @@ class MainActivity : ComponentActivity() {
 
         ConstraintLayout(
             constraintSet = set,
-            modifier = modifier
-                .fillMaxSize()
+            modifier = modifier.fillMaxSize()
         ) {
             Box(
                 modifier = modifier
@@ -591,8 +745,7 @@ class MainActivity : ComponentActivity() {
         modifier: Modifier = Modifier
     ) {
         LazyColumn(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(12.dp),
             reverseLayout = true
         ) {
@@ -641,13 +794,11 @@ class MainActivity : ComponentActivity() {
             mutableStateOf("")
         }
         Scaffold(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             scaffoldState = state
         ) { it ->
             Column(
-                modifier = modifier
-                    .padding(it),
+                modifier = modifier.padding(it),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -669,15 +820,13 @@ class MainActivity : ComponentActivity() {
                 modifier = modifier.padding(16.dp)
             )
 
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        state.snackbarHostState.showSnackbar(
-                            "clicking $textFieldState"
-                        )
-                    }
+            Button(onClick = {
+                coroutineScope.launch {
+                    state.snackbarHostState.showSnackbar(
+                        "clicking $textFieldState"
+                    )
                 }
-            ) {
+            }) {
                 Text(
                     text = "Click Me"
                 )
@@ -714,7 +863,7 @@ class MainActivity : ComponentActivity() {
                         )
                     )
                 }
-        ) {}
+        )
     }
 
     @Preview(showBackground = true)
@@ -817,20 +966,17 @@ class MainActivity : ComponentActivity() {
     ) {
         // TODO 3: uncomment and move this using navigation button for first video to its own screen
         Card(
-            modifier = modifier
-                .width(200.dp),
+            modifier = modifier.width(200.dp),
             shape = RoundedCornerShape(15.dp),
             elevation = 5.dp
         ) {
             Box(
-                modifier = modifier
-                    .height(200.dp)
+                modifier = modifier.height(200.dp)
             ) {
                 Image(
                     painter = painter,
                     contentDescription = contentDescription,
-                    modifier = modifier
-                        .fillMaxSize(),
+                    modifier = modifier.fillMaxSize(),
                     contentScale = ContentScale.Fit
                 )
 

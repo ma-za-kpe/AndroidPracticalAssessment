@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -212,9 +213,7 @@ fun ProfileSection(
         }
         ProfileDescription(
             name = "Programming Bear",
-            description = "5 years of coding experience" +
-                    " Want me to make your app? Send me an email! " +
-                    "Subscribe to my YouTube channel!",
+            description = stringResource(id = R.string.description),
             url = "https://youtube.com/c/makpalyy",
             followers = listOf("doctor", "miakhalifa"),
             otherCount = 62

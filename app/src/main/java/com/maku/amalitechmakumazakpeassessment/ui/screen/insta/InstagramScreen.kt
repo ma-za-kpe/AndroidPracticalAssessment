@@ -1,20 +1,16 @@
-package com.maku.amalitechmakumazakpeassessment.ui.screen
+package com.maku.amalitechmakumazakpeassessment.ui.screen.insta
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 
 @Composable
-fun InstagramScreen() {
-
-}
+fun InstagramScreen() {}
 
 @Preview(showBackground = true)
 @Composable
 fun InstagramUiInComposeUiPreview() {
     AmalitechMakuMazakpeAssessmentTheme {
-        InstagramScreen(
-
-        )
+        InstagramScreen()
     }
 }

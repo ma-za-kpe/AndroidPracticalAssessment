@@ -131,7 +131,7 @@ fun ProfileScreen() {
                     painterResource(id = R.drawable.master_logical_thinking),
                     painterResource(id = R.drawable.bad_habits),
                     painterResource(id = R.drawable.multiple_languages),
-                    painterResource(id = R.drawable.learn_coding_fast),
+                    painterResource(id = R.drawable.learn_coding_fast)
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -273,7 +273,7 @@ fun StatsSection(
 fun StatItem(
     number: String,
     text: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -289,7 +289,7 @@ fun StatItem(
             modifier = modifier.height(4.dp)
         )
         Text(
-            text = text,
+            text = text
         )
     }
 }
@@ -301,7 +301,7 @@ fun ProfileDescription(
     url: String,
     followers: List<String>,
     otherCount: Int,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val letterSpacing = 0.5.sp
     val lineHeight = 20.sp
@@ -515,7 +515,7 @@ fun PostTabViewPreview() {
                 ImageWithText(
                     image = painterResource(id = R.drawable.profile),
                     text = "Profile"
-                ),
+                )
             ),
             onTabSelected = {}
         )
@@ -614,7 +614,7 @@ fun HighlightSectionPreview() {
                 ImageWithText(
                     image = painterResource(id = R.drawable.telegram),
                     text = "Telegram"
-                ),
+                )
             )
         )
     }
@@ -685,9 +685,7 @@ fun TopBarPreview() {
 @Composable
 fun ProfileScreenPreview() {
     AmalitechMakuMazakpeAssessmentTheme {
-        ProfileScreen(
-
-        )
+        ProfileScreen()
     }
 }
 

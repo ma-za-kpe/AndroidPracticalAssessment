@@ -62,7 +62,6 @@ fun ListItem(
             .fillMaxWidth()
             .padding(15.dp)
     ) {
-
         val offset = Offset(
             5.0f,
             10.0f
@@ -98,7 +97,6 @@ fun ListItem(
                     .size(16.dp)
             )
         }
-
     }
 }
 

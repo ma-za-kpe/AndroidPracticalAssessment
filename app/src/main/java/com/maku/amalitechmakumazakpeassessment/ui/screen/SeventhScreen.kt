@@ -20,7 +20,6 @@ fun Seventh() {
     ListsInCompose()
 }
 
-
 @Composable
 fun ListsInCompose(
     modifier: Modifier = Modifier

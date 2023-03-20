@@ -21,7 +21,6 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Tenth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Third
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Timer
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Twelveth
-import com.maku.amalitechmakumazakpeassessment.ui.screen.TwelvethPreview
 
 @Composable
 fun MainApp(
@@ -29,80 +28,149 @@ fun MainApp(
 ) {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination = AssessmentIVideoScreens.MeinScreen.route) {
-        composable(route = AssessmentIVideoScreens.MeinScreen.route) {
+    NavHost(
+        navController = navController,
+        startDestination = AssessmentIVideoScreens.MeinScreen.route
+    ) {
+        composable(
+            route = AssessmentIVideoScreens.MeinScreen.route
+        ) {
             MainScreen(
                 items = items,
                 // TODO: replace this with a beter solution
                 onNavigateToScreen = {
-                    when(it) {
-                        "First" -> navController.navigate(AssessmentIVideoScreens.FirstScreen.route)
-                        "Second" -> navController.navigate(AssessmentIVideoScreens.SecondScreen.route)
-                        "Third" -> navController.navigate(AssessmentIVideoScreens.ThirdScreen.route)
-                        "Fourth" -> navController.navigate(AssessmentIVideoScreens.FourthScreen.route)
-                        "Fifth" -> navController.navigate(AssessmentIVideoScreens.FifthScreen.route)
-                        "Sixth" -> navController.navigate(AssessmentIVideoScreens.SixthScreen.route)
-                        "Seventh" -> navController.navigate(AssessmentIVideoScreens.SeventhScreen.route)
-                        "Eighth" -> navController.navigate(AssessmentIVideoScreens.EighthScreen.route)
-                        "Ninth" -> navController.navigate(AssessmentIVideoScreens.NinthScreen.route)
-                        "Tenth" -> navController.navigate(AssessmentIVideoScreens.TenthScreen.route)
-                        "Eleventh" -> navController.navigate(AssessmentIVideoScreens.EleventhScreen.route)
-                        "Twelve" -> navController.navigate(AssessmentIVideoScreens.TwelveScreen.route)
-                        "Meditation" -> navController.navigate(AssessmentIVideoScreens.MeditationScreen.route)
-                        "Timer" -> navController.navigate(AssessmentIVideoScreens.TimerScreen.route)
-                        "DropDown" -> navController.navigate(AssessmentIVideoScreens.DropDownScreen.route)
-                        "Instagram" -> navController.navigate(AssessmentIVideoScreens.InstagramScreen.route)
+                    when (it) {
+                        "First" -> navController.navigate(
+                            AssessmentIVideoScreens.FirstScreen.route
+                        )
+                        "Second" -> navController.navigate(
+                            AssessmentIVideoScreens.SecondScreen.route
+                        )
+                        "Third" -> navController.navigate(
+                            AssessmentIVideoScreens.ThirdScreen.route
+                        )
+                        "Fourth" -> navController.navigate(
+                            AssessmentIVideoScreens.FourthScreen.route
+                        )
+                        "Fifth" -> navController.navigate(
+                            AssessmentIVideoScreens.FifthScreen.route
+                        )
+                        "Sixth" -> navController.navigate(
+                            AssessmentIVideoScreens.SixthScreen.route
+                        )
+                        "Seventh" -> navController.navigate(
+                            AssessmentIVideoScreens.SeventhScreen.route
+                        )
+                        "Eighth" -> navController.navigate(
+                            AssessmentIVideoScreens.EighthScreen.route
+                        )
+                        "Ninth" -> navController.navigate(
+                            AssessmentIVideoScreens.NinthScreen.route
+                        )
+                        "Tenth" -> navController.navigate(
+                            AssessmentIVideoScreens.TenthScreen.route
+                        )
+                        "Eleventh" -> navController.navigate(
+                            AssessmentIVideoScreens.EleventhScreen.route
+                        )
+                        "Twelve" -> navController.navigate(
+                            AssessmentIVideoScreens.TwelveScreen.route
+                        )
+                        "Meditation" -> navController.navigate(
+                            AssessmentIVideoScreens.MeditationScreen.route
+                        )
+                        "Timer" -> navController.navigate(
+                            AssessmentIVideoScreens.TimerScreen.route
+                        )
+                        "DropDown" -> navController.navigate(
+                            AssessmentIVideoScreens.DropDownScreen.route
+                        )
+                        "Instagram" -> navController.navigate(
+                            AssessmentIVideoScreens.InstagramScreen.route
+                        )
                     }
                 }
             )
         }
 
-        composable(route = AssessmentIVideoScreens.FirstScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.FirstScreen.route
+        ) {
             First()
         }
-        composable(route = AssessmentIVideoScreens.SecondScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.SecondScreen.route
+        ) {
             Second()
         }
-        composable(route = AssessmentIVideoScreens.ThirdScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.ThirdScreen.route
+        ) {
             Third()
         }
-        composable(route = AssessmentIVideoScreens.FourthScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.FourthScreen.route
+        ) {
             Fourth()
         }
-        composable(route = AssessmentIVideoScreens.FifthScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.FifthScreen.route
+        ) {
             Fifth()
         }
-        composable(route = AssessmentIVideoScreens.SixthScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.SixthScreen.route
+        ) {
             Sixth()
         }
-        composable(route = AssessmentIVideoScreens.SeventhScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.SeventhScreen.route
+        ) {
             Seventh()
         }
-        composable(route = AssessmentIVideoScreens.EighthScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.EighthScreen.route
+        ) {
             Eight()
         }
-        composable(route = AssessmentIVideoScreens.NinthScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.NinthScreen.route
+        ) {
             Nineth()
         }
-        composable(route = AssessmentIVideoScreens.TenthScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.TenthScreen.route
+        ) {
             Tenth()
         }
-        composable(route = AssessmentIVideoScreens.EleventhScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.EleventhScreen.route
+        ) {
             Eleventh()
         }
-        composable(route = AssessmentIVideoScreens.TwelveScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.TwelveScreen.route
+        ) {
             Twelveth()
         }
-        composable(route = AssessmentIVideoScreens.MeditationScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.MeditationScreen.route
+        ) {
             Medidtation()
         }
-        composable(route = AssessmentIVideoScreens.TimerScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.TimerScreen.route
+        ) {
             Timer()
         }
-        composable(route = AssessmentIVideoScreens.DropDownScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.DropDownScreen.route
+        ) {
             DropDown()
         }
-        composable(route = AssessmentIVideoScreens.InstagramScreen.route) {
+        composable(
+            route = AssessmentIVideoScreens.InstagramScreen.route
+        ) {
             Instagram()
         }
     }

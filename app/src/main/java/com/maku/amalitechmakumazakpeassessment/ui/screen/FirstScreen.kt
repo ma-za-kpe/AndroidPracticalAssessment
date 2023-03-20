@@ -24,9 +24,7 @@ fun First() {
             .background(Color.Magenta),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
-    ) {
-
-    }
+    ) {}
 
     Row(
         modifier = Modifier

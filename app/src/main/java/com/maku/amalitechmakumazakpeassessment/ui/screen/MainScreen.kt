@@ -15,8 +15,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,12 +23,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.maku.amalitechmakumazakpeassessment.R
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 import com.maku.amalitechmakumazakpeassessment.ui.theme.ButtonBlue
 
@@ -56,8 +52,8 @@ fun MainScreen(
 
 @Composable
 fun ListItem(
-   item: String,
-   onNavigateToScreen: (String) -> Unit
+    item: String,
+    onNavigateToScreen: (String) -> Unit
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -111,7 +107,7 @@ fun ListItem(
 fun ListItemPreview() {
     AmalitechMakuMazakpeAssessmentTheme {
         ListItem(
-           "Drop Down",
+            "Drop Down",
             {}
         )
     }

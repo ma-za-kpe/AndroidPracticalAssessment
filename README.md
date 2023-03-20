@@ -1,6 +1,6 @@
 ﻿# AndroidPracticalAssessment
 ## DEMO 
-https://user-images.githubusercontent.com/28810111/226258015-21d7a244-cb5e-4c02-93aa-7ecc00598f9c.mp4
+https://user-images.githubusercontent.com/28810111/226279538-fe6970a6-b9dc-4567-8d61-89d6bfc37f95.mp4
 
 ## Going through this playlist by Phillip Lackner > https://www.youtube.com/playlist?list=PLQkwcJG4YTCSpJ2NLhDTHhi6XBNfk9WiC
 

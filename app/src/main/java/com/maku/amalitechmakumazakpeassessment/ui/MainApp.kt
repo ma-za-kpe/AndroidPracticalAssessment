@@ -21,23 +21,29 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Tenth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Third
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Timer
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Twelveth
+import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BotomNavGraph
+import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNaveBadges
+import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNavigationScreens
 
 @Composable
 fun MainApp(
     items: List<String>
 ) {
     val navController = rememberNavController()
-
     NavHost(
         navController = navController,
         startDestination = AssessmentIVideoScreens.MeinScreen.route
     ) {
+        // TODO: This tries to nest a bottom bar, but i think this is an anti-pattern
+        BotomNavGraph(
+            BottomNavigationScreens.HomeScreen.route
+        )
         composable(
             route = AssessmentIVideoScreens.MeinScreen.route
         ) {
             MainScreen(
                 items = items,
-                // TODO: replace this with a beter solution
+                // TODO: replace this with a better solution
                 onNavigateToScreen = {
                     when (it) {
                         "First" -> navController.navigate(
@@ -87,6 +93,9 @@ fun MainApp(
                         )
                         "Instagram" -> navController.navigate(
                             AssessmentIVideoScreens.InstagramScreen.route
+                        )
+                        "Badges" -> navController.navigate(
+                            AssessmentIVideoScreens.BottomNavBadgesScreen.route
                         )
                     }
                 }
@@ -173,6 +182,13 @@ fun MainApp(
         ) {
             Instagram()
         }
+        composable(
+            route = AssessmentIVideoScreens.BottomNavBadgesScreen.route
+        ) {
+            BottomNaveBadges(
+                navController
+            )
+        }
     }
 }
 
@@ -195,4 +211,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object TimerScreen : AssessmentIVideoScreens("timer_screen")
     object DropDownScreen : AssessmentIVideoScreens("drop_down_screen")
     object InstagramScreen : AssessmentIVideoScreens("insta_screen")
+    object BottomNavBadgesScreen : AssessmentIVideoScreens("badges_screen")
 }

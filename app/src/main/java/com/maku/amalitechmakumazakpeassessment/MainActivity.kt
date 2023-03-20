@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
                         "Meditation",
                         "Timer",
                         "DropDown",
-                        "Instagram"
+                        "Instagram",
+                        "Badges"
                     )
                 )
             }

@@ -41,7 +41,7 @@ fun MainScreen(
             vertical = 8.dp
         )
     ) {
-        items(items) {
+        items(items.reversed()) {
             ListItem(
                 item = it,
                 onNavigateToScreen = onNavigateToScreen

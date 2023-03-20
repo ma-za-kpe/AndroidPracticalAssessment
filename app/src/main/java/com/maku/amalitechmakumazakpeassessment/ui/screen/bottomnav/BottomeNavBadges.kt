@@ -54,7 +54,7 @@ fun BottomNaveBadges(
                         route = "settings",
                         icon = Icons.Default.Settings,
                         badgeCount = 214
-                    ),
+                    )
                 ),
                 navController = navController,
                 onItemClick = {

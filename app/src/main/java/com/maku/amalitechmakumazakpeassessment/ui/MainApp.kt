@@ -212,5 +212,4 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object DropDownScreen : AssessmentIVideoScreens("drop_down_screen")
     object InstagramScreen : AssessmentIVideoScreens("insta_screen")
     object BottomNavBadgesScreen : AssessmentIVideoScreens("badges_screen")
-
 }

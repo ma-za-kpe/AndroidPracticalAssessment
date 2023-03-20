@@ -2,6 +2,8 @@
 ## DEMO 
 https://user-images.githubusercontent.com/28810111/226258015-21d7a244-cb5e-4c02-93aa-7ecc00598f9c.mp4
 
+## Going through this playlist by Phillip Lackner > https://www.youtube.com/playlist?list=PLQkwcJG4YTCSpJ2NLhDTHhi6XBNfk9WiC
+
 ## Installation
 Please follow these steps to set up AndroidAssessment on your local machine.
 1. Create a new, empty folder called androidassessmentamalitech/ within your home folder.

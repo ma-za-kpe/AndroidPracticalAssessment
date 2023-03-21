@@ -10,12 +10,14 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.maku.amalitechmakumazakpeassessment.R
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -24,7 +26,7 @@ fun PermissionsScreen() {
     val permissionsState = rememberMultiplePermissionsState(
         permissions = listOf(
             Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.CAMERA,
+            Manifest.permission.CAMERA
         )
     )
 
@@ -66,8 +68,9 @@ fun PermissionsScreen() {
                         }
                         perm.isPermanentlyDenied() -> {
                             Text(
-                                text = "Camera permission was permanently denied. You can enable" +
-                                        " it in the app settings."
+                                text = stringResource(
+                                    id = R.string.deny_camera
+                                )
                             )
                         }
                     }
@@ -86,8 +89,9 @@ fun PermissionsScreen() {
                         }
                         perm.isPermanentlyDenied() -> {
                             Text(
-                                text = "Record audio permission was permanently denied. You can " +
-                                        "enable it in the app settings."
+                                text = stringResource(
+                                    id = R.string.deny_record
+                                )
                             )
                         }
                     }

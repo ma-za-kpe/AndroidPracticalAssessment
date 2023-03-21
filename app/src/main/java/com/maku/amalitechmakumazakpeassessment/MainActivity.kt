@@ -32,7 +32,8 @@ class MainActivity : ComponentActivity() {
                         "DropDown",
                         "Instagram",
                         "Badges",
-                        "Parallax"
+                        "Parallax",
+                        "MultiSelect"
                     )
                 )
             }

@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
-import com.maku.amalitechmakumazakpeassessment.ui.theme.LocalSpacing
 import com.maku.amalitechmakumazakpeassessment.ui.theme.spacing
 
 @Composable
@@ -19,7 +18,7 @@ fun ThemeScreen() {
         color = MaterialTheme.colors.background,
         modifier = Modifier
             .padding(
-               MaterialTheme.spacing.extraLarge
+                MaterialTheme.spacing.extraLarge
             )
     ) {
         Text(

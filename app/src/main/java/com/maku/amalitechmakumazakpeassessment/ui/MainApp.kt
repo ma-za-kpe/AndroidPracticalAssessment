@@ -13,7 +13,10 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Fourth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Instagram
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MainScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Medidtation
+import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Nineth
+import com.maku.amalitechmakumazakpeassessment.ui.screen.ParallaxEffectScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.PermissionsScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Seventh
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Sixth
@@ -96,6 +99,17 @@ fun MainApp(
                         )
                         "Badges" -> navController.navigate(
                             AssessmentIVideoScreens.BottomNavBadgesScreen.route
+                        )
+                        "Parallax" -> navController.navigate(
+                            AssessmentIVideoScreens.ParallaxEffectScreen.route
+                        )
+
+                        "MultiSelect" -> navController.navigate(
+                            AssessmentIVideoScreens.MultiSelectScreen.route
+                        )
+
+                        "Permissions" -> navController.navigate(
+                            AssessmentIVideoScreens.PermissionsScreen.route
                         )
                     }
                 }
@@ -189,6 +203,24 @@ fun MainApp(
                 navController
             )
         }
+
+        composable(
+            route = AssessmentIVideoScreens.ParallaxEffectScreen.route
+        ) {
+            ParallaxEffectScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.MultiSelectScreen.route
+        ) {
+            MultiSelectScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.PermissionsScreen.route
+        ) {
+            PermissionsScreen()
+        }
     }
 }
 
@@ -212,4 +244,7 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object DropDownScreen : AssessmentIVideoScreens("drop_down_screen")
     object InstagramScreen : AssessmentIVideoScreens("insta_screen")
     object BottomNavBadgesScreen : AssessmentIVideoScreens("badges_screen")
+    object ParallaxEffectScreen : AssessmentIVideoScreens("parallax_screen")
+    object MultiSelectScreen : AssessmentIVideoScreens("multi_select_screen")
+    object PermissionsScreen : AssessmentIVideoScreens("permissions_screen")
 }

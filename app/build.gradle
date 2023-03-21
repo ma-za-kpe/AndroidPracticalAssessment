@@ -48,6 +48,8 @@ android {
 
 dependencies {
 
+    implementation "com.google.accompanist:accompanist-permissions:0.21.1-beta"
+
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
     def nav_version = "2.5.3"

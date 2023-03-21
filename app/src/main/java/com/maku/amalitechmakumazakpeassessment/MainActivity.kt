@@ -33,7 +33,8 @@ class MainActivity : ComponentActivity() {
                         "Instagram",
                         "Badges",
                         "Parallax",
-                        "MultiSelect"
+                        "MultiSelect",
+                        "Permissions"
                     )
                 )
             }

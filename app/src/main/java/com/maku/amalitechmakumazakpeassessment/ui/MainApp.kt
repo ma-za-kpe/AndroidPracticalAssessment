@@ -16,6 +16,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Medidtation
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Nineth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.ParallaxEffectScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.PermissionsScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Seventh
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Sixth
@@ -105,6 +106,10 @@ fun MainApp(
 
                         "MultiSelect" -> navController.navigate(
                             AssessmentIVideoScreens.MultiSelectScreen.route
+                        )
+
+                        "Permissions" -> navController.navigate(
+                            AssessmentIVideoScreens.PermissionsScreen.route
                         )
                     }
                 }
@@ -210,6 +215,12 @@ fun MainApp(
         ) {
             MultiSelectScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.PermissionsScreen.route
+        ) {
+            PermissionsScreen()
+        }
     }
 }
 
@@ -235,4 +246,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object BottomNavBadgesScreen : AssessmentIVideoScreens("badges_screen")
     object ParallaxEffectScreen : AssessmentIVideoScreens("parallax_screen")
     object MultiSelectScreen : AssessmentIVideoScreens("multi_select_screen")
+    object PermissionsScreen : AssessmentIVideoScreens("permissions_screen")
 }

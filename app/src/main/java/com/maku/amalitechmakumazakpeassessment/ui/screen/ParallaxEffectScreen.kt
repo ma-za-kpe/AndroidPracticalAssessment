@@ -140,7 +140,6 @@ fun ParallaxEffectScreen() {
             )
         }
     }
-
 }
 
 @Preview(showBackground = true)

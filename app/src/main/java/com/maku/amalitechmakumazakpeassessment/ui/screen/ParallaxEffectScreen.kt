@@ -57,10 +57,10 @@ fun ParallaxEffectScreen() {
             val delta = available.y
             val layoutInfo = lazyListState.layoutInfo
             // Check if the first item is visible
-            if(lazyListState.firstVisibleItemIndex == 0) {
+            if (lazyListState.firstVisibleItemIndex == 0) {
                 return Offset.Zero
             }
-            if(layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1) {
+            if (layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1) {
                 return Offset.Zero
             }
             moonOffset += delta * moonScrollSpeed
@@ -104,7 +104,8 @@ fun ParallaxEffectScreen() {
                     contentDescription = "moon",
                     contentScale = ContentScale.FillWidth,
                     alignment = Alignment.BottomCenter,
-                    modifier = Modifier.matchParentSize()
+                    modifier = Modifier
+                        .matchParentSize()
                         .graphicsLayer {
                             translationY = moonOffset
                         }
@@ -114,7 +115,8 @@ fun ParallaxEffectScreen() {
                     contentDescription = "mid bg",
                     contentScale = ContentScale.FillWidth,
                     alignment = Alignment.BottomCenter,
-                    modifier = Modifier.matchParentSize()
+                    modifier = Modifier
+                        .matchParentSize()
                         .graphicsLayer {
                             translationY = midBgOffset
                         }

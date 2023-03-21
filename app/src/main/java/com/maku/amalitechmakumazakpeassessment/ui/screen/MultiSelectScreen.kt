@@ -49,7 +49,9 @@ fun MultiSelectScreen() {
                         items = items.mapIndexed { j, item ->
                             if (i == j) {
                                 item.copy(isSelected = !item.isSelected)
-                            } else item
+                            } else {
+                                item
+                            }
                         }
                     }
                     .padding(16.dp),

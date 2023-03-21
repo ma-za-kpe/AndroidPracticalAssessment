@@ -13,6 +13,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Fourth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Instagram
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MainScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Medidtation
+import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Nineth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.ParallaxEffectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
@@ -100,6 +101,10 @@ fun MainApp(
                         )
                         "Parallax" -> navController.navigate(
                             AssessmentIVideoScreens.ParallaxEffectScreen.route
+                        )
+
+                        "MultiSelect" -> navController.navigate(
+                            AssessmentIVideoScreens.MultiSelectScreen.route
                         )
                     }
                 }
@@ -199,6 +204,12 @@ fun MainApp(
         ) {
             ParallaxEffectScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.MultiSelectScreen.route
+        ) {
+            MultiSelectScreen()
+        }
     }
 }
 
@@ -223,4 +234,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object InstagramScreen : AssessmentIVideoScreens("insta_screen")
     object BottomNavBadgesScreen : AssessmentIVideoScreens("badges_screen")
     object ParallaxEffectScreen : AssessmentIVideoScreens("parallax_screen")
+    object MultiSelectScreen : AssessmentIVideoScreens("multi_select_screen")
 }

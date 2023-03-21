@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
                         "Timer",
                         "DropDown",
                         "Instagram",
-                        "Badges"
+                        "Badges",
+                        "Parallax"
                     )
                 )
             }

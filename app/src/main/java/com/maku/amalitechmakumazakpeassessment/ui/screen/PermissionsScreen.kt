@@ -33,7 +33,7 @@ fun PermissionsScreen() {
         key1 = lifecycleOwner,
         effect = {
             val observer = LifecycleEventObserver { _, event ->
-                if(event == Lifecycle.Event.ON_START) {
+                if (event == Lifecycle.Event.ON_START) {
                     permissionsState.launchMultiplePermissionRequest()
                 }
             }

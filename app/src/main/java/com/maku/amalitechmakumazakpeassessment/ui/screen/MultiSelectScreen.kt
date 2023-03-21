@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.maku.amalitechmakumazakpeassessment.ui.screen.insta.ProfileScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 
 @Composable
@@ -48,7 +47,7 @@ fun MultiSelectScreen() {
                     .fillMaxWidth()
                     .clickable {
                         items = items.mapIndexed { j, item ->
-                            if(i == j) {
+                            if (i == j) {
                                 item.copy(isSelected = !item.isSelected)
                             } else item
                         }
@@ -58,7 +57,7 @@ fun MultiSelectScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(text = items[i].title)
-                if(items[i].isSelected) {
+                if (items[i].isSelected) {
                     // add this icon in a box, such that it looks like a real check box
                     Icon(
                         imageVector = Icons.Default.Check,

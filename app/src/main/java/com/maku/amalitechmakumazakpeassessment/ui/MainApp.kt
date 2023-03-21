@@ -21,6 +21,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Seventh
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Sixth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Tenth
+import com.maku.amalitechmakumazakpeassessment.ui.screen.ThemeScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Third
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Timer
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Twelveth
@@ -110,6 +111,10 @@ fun MainApp(
 
                         "Permissions" -> navController.navigate(
                             AssessmentIVideoScreens.PermissionsScreen.route
+                        )
+
+                        "Theme" -> navController.navigate(
+                            AssessmentIVideoScreens.ThemeScreen.route
                         )
                     }
                 }
@@ -221,6 +226,12 @@ fun MainApp(
         ) {
             PermissionsScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.ThemeScreen.route
+        ) {
+            ThemeScreen()
+        }
     }
 }
 
@@ -247,4 +258,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object ParallaxEffectScreen : AssessmentIVideoScreens("parallax_screen")
     object MultiSelectScreen : AssessmentIVideoScreens("multi_select_screen")
     object PermissionsScreen : AssessmentIVideoScreens("permissions_screen")
+    object ThemeScreen : AssessmentIVideoScreens("theme_screen")
 }

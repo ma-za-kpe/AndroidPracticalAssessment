@@ -35,7 +35,8 @@ class MainActivity : ComponentActivity() {
                         "Parallax",
                         "MultiSelect",
                         "Permissions",
-                        "Theme"
+                        "Theme",
+                        "AnimatedCounter"
                     )
                 )
             }

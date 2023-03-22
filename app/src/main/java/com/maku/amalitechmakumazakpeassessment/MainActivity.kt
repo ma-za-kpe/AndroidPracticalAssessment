@@ -15,77 +15,51 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AmalitechMakuMazakpeAssessmentTheme {
-                // TODO: handle this repeation of list items
                 MainApp(
-                    items = listOf(
-                        "First",
-                        "Second",
-                        "Third",
-                        "Fourth",
-                        "Fifth",
-                        "Sixth",
-                        "Seventh",
-                        "Eighth",
-                        "Ninth",
-                        "Tenth",
-                        "Eleventh",
-                        "Twelve",
-                        "Meditation",
-                        "Timer",
-                        "DropDown",
-                        "Instagram",
-                        "Badges",
-                        "Parallax",
-                        "MultiSelect",
-                        "Permissions",
-                        "Theme",
-                        "AnimatedCounter",
-                        "DeepLinks",
-                        "LayGrid",
-                        "Drawer",
-                        "BottomSheet",
-                        "Pagination"
-                    )
+                    items = list
                 )
             }
         }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun BottomSheetScreenPreview() {
-    AmalitechMakuMazakpeAssessmentTheme {
-        MainApp(
-            items = listOf(
-                "First",
-                "Second",
-                "Third",
-                "Fourth",
-                "Fifth",
-                "Sixth",
-                "Seventh",
-                "Eighth",
-                "Ninth",
-                "Tenth",
-                "Eleventh",
-                "Twelve",
-                "Meditation",
-                "Timer",
-                "DropDown",
-                "Instagram",
-                "Badges",
-                "Parallax",
-                "MultiSelect",
-                "Permissions",
-                "Theme",
-                "AnimatedCounter",
-                "DeepLinks",
-                "LayGrid",
-                "Drawer",
-                "BottomSheet",
-                "Pagination"
+    @Preview(showBackground = true)
+    @Composable
+    fun MainAppPreview() {
+        AmalitechMakuMazakpeAssessmentTheme {
+            MainApp(
+                items = list
             )
-        )
+        }
     }
 }
+
+val list = listOf(
+    "First",
+    "Second",
+    "Third",
+    "Fourth",
+    "Fifth",
+    "Sixth",
+    "Seventh",
+    "Eighth",
+    "Ninth",
+    "Tenth",
+    "Eleventh",
+    "Twelve",
+    "Meditation",
+    "Timer",
+    "DropDown",
+    "Instagram",
+    "Badges",
+    "Parallax",
+    "MultiSelect",
+    "Permissions",
+    "Theme",
+    "AnimatedCounter",
+    "DeepLinks",
+    "LayGrid",
+    "Drawer",
+    "BottomSheet",
+    "Pagination",
+    "MotionLayout"
+)

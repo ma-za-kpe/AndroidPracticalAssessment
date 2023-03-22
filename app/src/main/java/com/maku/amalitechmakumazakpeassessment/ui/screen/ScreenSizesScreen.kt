@@ -15,13 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.maku.amalitechmakumazakpeassessment.ui.screen.insta.ProfileScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 
 @Composable
 fun ScreenSizesScreen() {
     val windowInfo = rememberWindowInfo()
-    if(windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
+    if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -122,8 +121,8 @@ data class WindowInfo(
     val screenHeight: Dp
 ) {
     sealed class WindowType {
-        object Compact: WindowType()
-        object Medium: WindowType()
-        object Expanded: WindowType()
+        object Compact : WindowType()
+        object Medium : WindowType()
+        object Expanded : WindowType()
     }
 }

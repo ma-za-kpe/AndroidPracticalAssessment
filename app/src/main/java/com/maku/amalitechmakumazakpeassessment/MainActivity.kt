@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
                         "Theme",
                         "AnimatedCounter",
                         "DeepLinks",
-                        "LayGrid"
+                        "LayGrid",
+                        "Drawer"
                     )
                 )
             }

@@ -43,7 +43,8 @@ class MainActivity : ComponentActivity() {
                         "DeepLinks",
                         "LayGrid",
                         "Drawer",
-                        "BottomSheet"
+                        "BottomSheet",
+                        "Pagination"
                     )
                 )
             }
@@ -82,7 +83,8 @@ fun BottomSheetScreenPreview() {
                 "DeepLinks",
                 "LayGrid",
                 "Drawer",
-                "BottomSheet"
+                "BottomSheet",
+                "Pagination"
             )
         )
     }

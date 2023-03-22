@@ -20,7 +20,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAsse
 @Composable
 fun LazyGridScreen() {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(100.dp),
+        columns = GridCells.Adaptive(100.dp)
     ) {
         items(100) { index ->
             Box(

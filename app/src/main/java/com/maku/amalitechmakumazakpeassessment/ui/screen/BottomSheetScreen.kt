@@ -74,7 +74,6 @@ fun BottomSheetScreen() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun BottomSheetScreenPreview() {

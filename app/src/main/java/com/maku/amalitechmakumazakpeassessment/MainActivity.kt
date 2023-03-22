@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.maku.amalitechmakumazakpeassessment.ui.MainApp
-import com.maku.amalitechmakumazakpeassessment.ui.screen.BottomSheetScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -88,4 +87,3 @@ fun BottomSheetScreenPreview() {
         )
     }
 }
-

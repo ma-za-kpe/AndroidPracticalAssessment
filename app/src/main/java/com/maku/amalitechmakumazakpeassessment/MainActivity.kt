@@ -61,5 +61,6 @@ val list = listOf(
     "Drawer",
     "BottomSheet",
     "Pagination",
-    "MotionLayout"
+    "MotionLayout",
+    "ScreenSizes"
 )

@@ -26,6 +26,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Nineth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.ParallaxEffectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.PermissionsScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.ScreenSizesScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Seventh
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Sixth
@@ -154,6 +155,10 @@ fun MainApp(
 
                         "MotionLayout" -> navController.navigate(
                             AssessmentIVideoScreens.MotionLayoutScreen.route
+                        )
+
+                        "ScreenSizes" -> navController.navigate(
+                            AssessmentIVideoScreens.ScreenSizesScreen.route
                         )
                     }
                 }
@@ -328,6 +333,12 @@ fun MainApp(
         ) {
             MotionLayoutScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.ScreenSizesScreen.route
+        ) {
+            ScreenSizesScreen()
+        }
     }
 }
 
@@ -362,4 +373,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object BottomSheetScreen : AssessmentIVideoScreens("bottom_sheet_screen")
     object PaginationScreen : AssessmentIVideoScreens("pagination_screen")
     object MotionLayoutScreen : AssessmentIVideoScreens("motion_layout_screen")
+    object ScreenSizesScreen : AssessmentIVideoScreens("screen_sizes_screen")
 }

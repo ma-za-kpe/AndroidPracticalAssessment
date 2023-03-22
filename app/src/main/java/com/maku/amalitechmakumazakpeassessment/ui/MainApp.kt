@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.BottomSheetScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
@@ -139,6 +140,10 @@ fun MainApp(
 
                         "Drawer" -> navController.navigate(
                             AssessmentIVideoScreens.DrawerScreen.route
+                        )
+
+                        "BottomSheet" -> navController.navigate(
+                            AssessmentIVideoScreens.BottomSheetScreen.route
                         )
                     }
                 }
@@ -295,6 +300,12 @@ fun MainApp(
         ) {
             DrawerScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.BottomSheetScreen.route
+        ) {
+            BottomSheetScreen()
+        }
     }
 }
 
@@ -326,4 +337,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object DeepLinksScreen : AssessmentIVideoScreens("deep_links_screen")
     object LazyGridScreen : AssessmentIVideoScreens("deep_grid_screen")
     object DrawerScreen : AssessmentIVideoScreens("drawer_screen")
+    object BottomSheetScreen : AssessmentIVideoScreens("bottom_sheet_screen")
 }

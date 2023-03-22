@@ -37,6 +37,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BotomNavGraph
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNaveBadges
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNavigationScreens
 import com.maku.amalitechmakumazakpeassessment.ui.screen.drawer.DrawerScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.pagination.PaginationScreen
 
 @Composable
 fun MainApp(
@@ -144,6 +145,10 @@ fun MainApp(
 
                         "BottomSheet" -> navController.navigate(
                             AssessmentIVideoScreens.BottomSheetScreen.route
+                        )
+
+                        "Pagination" -> navController.navigate(
+                            AssessmentIVideoScreens.PaginationScreen.route
                         )
                     }
                 }
@@ -306,6 +311,12 @@ fun MainApp(
         ) {
             BottomSheetScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.PaginationScreen.route
+        ) {
+            PaginationScreen()
+        }
     }
 }
 
@@ -338,4 +349,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object LazyGridScreen : AssessmentIVideoScreens("deep_grid_screen")
     object DrawerScreen : AssessmentIVideoScreens("drawer_screen")
     object BottomSheetScreen : AssessmentIVideoScreens("bottom_sheet_screen")
+    object PaginationScreen : AssessmentIVideoScreens("pagination_screen")
 }

@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.BottomSheetScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
@@ -20,10 +21,12 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Instagram
 import com.maku.amalitechmakumazakpeassessment.ui.screen.LazyGridScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MainScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Medidtation
+import com.maku.amalitechmakumazakpeassessment.ui.screen.MotionLayoutScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Nineth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.ParallaxEffectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.PermissionsScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.ScreenSizesScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Seventh
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Sixth
@@ -35,6 +38,8 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Twelveth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BotomNavGraph
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNaveBadges
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNavigationScreens
+import com.maku.amalitechmakumazakpeassessment.ui.screen.drawer.DrawerScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.pagination.PaginationScreen
 
 @Composable
 fun MainApp(
@@ -134,6 +139,26 @@ fun MainApp(
 
                         "LayGrid" -> navController.navigate(
                             AssessmentIVideoScreens.LazyGridScreen.route
+                        )
+
+                        "Drawer" -> navController.navigate(
+                            AssessmentIVideoScreens.DrawerScreen.route
+                        )
+
+                        "BottomSheet" -> navController.navigate(
+                            AssessmentIVideoScreens.BottomSheetScreen.route
+                        )
+
+                        "Pagination" -> navController.navigate(
+                            AssessmentIVideoScreens.PaginationScreen.route
+                        )
+
+                        "MotionLayout" -> navController.navigate(
+                            AssessmentIVideoScreens.MotionLayoutScreen.route
+                        )
+
+                        "ScreenSizes" -> navController.navigate(
+                            AssessmentIVideoScreens.ScreenSizesScreen.route
                         )
                     }
                 }
@@ -284,6 +309,36 @@ fun MainApp(
         ) {
             LazyGridScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.DrawerScreen.route
+        ) {
+            DrawerScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.BottomSheetScreen.route
+        ) {
+            BottomSheetScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.PaginationScreen.route
+        ) {
+            PaginationScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.MotionLayoutScreen.route
+        ) {
+            MotionLayoutScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.ScreenSizesScreen.route
+        ) {
+            ScreenSizesScreen()
+        }
     }
 }
 
@@ -314,4 +369,9 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object AnimatedCounterScreen : AssessmentIVideoScreens("animated_counter_screen")
     object DeepLinksScreen : AssessmentIVideoScreens("deep_links_screen")
     object LazyGridScreen : AssessmentIVideoScreens("deep_grid_screen")
+    object DrawerScreen : AssessmentIVideoScreens("drawer_screen")
+    object BottomSheetScreen : AssessmentIVideoScreens("bottom_sheet_screen")
+    object PaginationScreen : AssessmentIVideoScreens("pagination_screen")
+    object MotionLayoutScreen : AssessmentIVideoScreens("motion_layout_screen")
+    object ScreenSizesScreen : AssessmentIVideoScreens("screen_sizes_screen")
 }

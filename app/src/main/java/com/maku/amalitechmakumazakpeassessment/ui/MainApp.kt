@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.drawer.DrawerScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eleventh
@@ -134,6 +135,10 @@ fun MainApp(
 
                         "LayGrid" -> navController.navigate(
                             AssessmentIVideoScreens.LazyGridScreen.route
+                        )
+
+                        "Drawer" -> navController.navigate(
+                            AssessmentIVideoScreens.DrawerScreen.route
                         )
                     }
                 }
@@ -284,6 +289,12 @@ fun MainApp(
         ) {
             LazyGridScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.DrawerScreen.route
+        ) {
+            DrawerScreen()
+        }
     }
 }
 
@@ -314,4 +325,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object AnimatedCounterScreen : AssessmentIVideoScreens("animated_counter_screen")
     object DeepLinksScreen : AssessmentIVideoScreens("deep_links_screen")
     object LazyGridScreen : AssessmentIVideoScreens("deep_grid_screen")
+    object DrawerScreen : AssessmentIVideoScreens("drawer_screen")
 }

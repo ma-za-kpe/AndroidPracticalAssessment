@@ -10,7 +10,6 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
-import com.maku.amalitechmakumazakpeassessment.ui.screen.drawer.DrawerScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eleventh
@@ -36,6 +35,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Twelveth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BotomNavGraph
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNaveBadges
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNavigationScreens
+import com.maku.amalitechmakumazakpeassessment.ui.screen.drawer.DrawerScreen
 
 @Composable
 fun MainApp(

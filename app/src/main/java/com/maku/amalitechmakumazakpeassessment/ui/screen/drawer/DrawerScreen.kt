@@ -57,7 +57,7 @@ fun DrawerScreen() {
                         title = "Help",
                         contentDescription = "Get help",
                         icon = Icons.Default.Info
-                    ),
+                    )
                 ),
                 onItemClick = {
                     println("Clicked on ${it.title}")

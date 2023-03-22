@@ -48,7 +48,7 @@ fun BottomSheetScreen() {
             }
         },
         sheetBackgroundColor = Color.Green,
-        sheetPeekHeight = 0.dp
+        sheetPeekHeight = 20.dp
     ) {
         Box(
             modifier = Modifier

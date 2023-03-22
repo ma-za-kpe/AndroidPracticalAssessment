@@ -1,9 +1,15 @@
 package com.maku.amalitechmakumazakpeassessment.ui
 
+import android.content.Intent
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
+import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eleventh
@@ -11,6 +17,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Fifth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.First
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Fourth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Instagram
+import com.maku.amalitechmakumazakpeassessment.ui.screen.LazyGridScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MainScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Medidtation
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
@@ -21,6 +28,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Seventh
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Sixth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Tenth
+import com.maku.amalitechmakumazakpeassessment.ui.screen.ThemeScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Third
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Timer
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Twelveth
@@ -110,6 +118,22 @@ fun MainApp(
 
                         "Permissions" -> navController.navigate(
                             AssessmentIVideoScreens.PermissionsScreen.route
+                        )
+
+                        "Theme" -> navController.navigate(
+                            AssessmentIVideoScreens.ThemeScreen.route
+                        )
+
+                        "AnimatedCounter" -> navController.navigate(
+                            AssessmentIVideoScreens.AnimatedCounterScreen.route
+                        )
+
+                        "DeepLinks" -> navController.navigate(
+                            AssessmentIVideoScreens.DeepLinksScreen.route
+                        )
+
+                        "LayGrid" -> navController.navigate(
+                            AssessmentIVideoScreens.LazyGridScreen.route
                         )
                     }
                 }
@@ -221,6 +245,45 @@ fun MainApp(
         ) {
             PermissionsScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.ThemeScreen.route
+        ) {
+            ThemeScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.AnimatedCounterScreen.route
+        ) {
+            AnimatedCounterScreen()
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.DeepLinksScreen.route,
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "https://maku.dev/{id}"
+                    action = Intent.ACTION_VIEW
+                }
+            ),
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.IntType
+                    defaultValue = -1
+                }
+            )
+        ) { entry ->
+            val id = entry.arguments?.getInt("id")
+            DeepLinksScreen(
+                id = id
+            )
+        }
+
+        composable(
+            route = AssessmentIVideoScreens.LazyGridScreen.route
+        ) {
+            LazyGridScreen()
+        }
     }
 }
 
@@ -247,4 +310,8 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object ParallaxEffectScreen : AssessmentIVideoScreens("parallax_screen")
     object MultiSelectScreen : AssessmentIVideoScreens("multi_select_screen")
     object PermissionsScreen : AssessmentIVideoScreens("permissions_screen")
+    object ThemeScreen : AssessmentIVideoScreens("theme_screen")
+    object AnimatedCounterScreen : AssessmentIVideoScreens("animated_counter_screen")
+    object DeepLinksScreen : AssessmentIVideoScreens("deep_links_screen")
+    object LazyGridScreen : AssessmentIVideoScreens("deep_grid_screen")
 }

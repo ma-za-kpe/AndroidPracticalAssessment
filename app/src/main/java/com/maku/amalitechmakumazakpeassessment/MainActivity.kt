@@ -34,7 +34,11 @@ class MainActivity : ComponentActivity() {
                         "Badges",
                         "Parallax",
                         "MultiSelect",
-                        "Permissions"
+                        "Permissions",
+                        "Theme",
+                        "AnimatedCounter",
+                        "DeepLinks",
+                        "LayGrid"
                     )
                 )
             }

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eleventh
@@ -115,6 +116,10 @@ fun MainApp(
 
                         "Theme" -> navController.navigate(
                             AssessmentIVideoScreens.ThemeScreen.route
+                        )
+
+                        "AnimatedCounter" -> navController.navigate(
+                            AssessmentIVideoScreens.AnimatedCounterScreen.route
                         )
                     }
                 }
@@ -232,6 +237,12 @@ fun MainApp(
         ) {
             ThemeScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.AnimatedCounterScreen.route
+        ) {
+            AnimatedCounterScreen()
+        }
     }
 }
 
@@ -259,4 +270,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object MultiSelectScreen : AssessmentIVideoScreens("multi_select_screen")
     object PermissionsScreen : AssessmentIVideoScreens("permissions_screen")
     object ThemeScreen : AssessmentIVideoScreens("theme_screen")
+    object AnimatedCounterScreen : AssessmentIVideoScreens("animated_counter_screen")
 }

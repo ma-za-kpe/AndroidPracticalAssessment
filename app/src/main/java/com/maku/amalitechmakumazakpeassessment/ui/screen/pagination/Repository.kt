@@ -22,6 +22,8 @@ class Repository {
                     startingIndex until startingIndex + pageSize
                 )
             )
-        } else Result.success(emptyList())
+        } else {
+            Result.success(emptyList())
+        }
     }
 }

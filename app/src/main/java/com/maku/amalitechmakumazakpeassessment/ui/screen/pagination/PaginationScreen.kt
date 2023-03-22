@@ -75,8 +75,3 @@ fun PaginationScreenPreview() {
         PaginationScreen()
     }
 }
-
-data class ApiListItem(
-    val title: String,
-    val description: String
-)

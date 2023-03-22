@@ -23,7 +23,6 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.MainScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Medidtation
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Nineth
-import com.maku.amalitechmakumazakpeassessment.ui.screen.pagination.PaginationScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.ParallaxEffectScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.PermissionsScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Second
@@ -38,6 +37,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BotomNavGraph
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNaveBadges
 import com.maku.amalitechmakumazakpeassessment.ui.screen.bottomnav.BottomNavigationScreens
 import com.maku.amalitechmakumazakpeassessment.ui.screen.drawer.DrawerScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.pagination.PaginationScreen
 
 @Composable
 fun MainApp(

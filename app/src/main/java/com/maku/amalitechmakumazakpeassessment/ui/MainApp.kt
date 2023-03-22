@@ -1,10 +1,15 @@
 package com.maku.amalitechmakumazakpeassessment.ui
 
+import android.content.Intent
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eleventh
@@ -120,6 +125,10 @@ fun MainApp(
 
                         "AnimatedCounter" -> navController.navigate(
                             AssessmentIVideoScreens.AnimatedCounterScreen.route
+                        )
+
+                        "DeepLinks" -> navController.navigate(
+                            AssessmentIVideoScreens.DeepLinksScreen.route
                         )
                     }
                 }
@@ -243,6 +252,27 @@ fun MainApp(
         ) {
             AnimatedCounterScreen()
         }
+
+        composable(
+            route = AssessmentIVideoScreens.DeepLinksScreen.route,
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "https://maku.dev/{id}"
+                    action = Intent.ACTION_VIEW
+                }
+            ),
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.IntType
+                    defaultValue = -1
+                }
+            )
+        ) { entry ->
+            val id = entry.arguments?.getInt("id")
+            DeepLinksScreen(
+                id = id
+            )
+        }
     }
 }
 
@@ -271,4 +301,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object PermissionsScreen : AssessmentIVideoScreens("permissions_screen")
     object ThemeScreen : AssessmentIVideoScreens("theme_screen")
     object AnimatedCounterScreen : AssessmentIVideoScreens("animated_counter_screen")
+    object DeepLinksScreen : AssessmentIVideoScreens("deep_links_screen")
 }

@@ -36,7 +36,8 @@ class MainActivity : ComponentActivity() {
                         "MultiSelect",
                         "Permissions",
                         "Theme",
-                        "AnimatedCounter"
+                        "AnimatedCounter",
+                        "DeepLinks"
                     )
                 )
             }

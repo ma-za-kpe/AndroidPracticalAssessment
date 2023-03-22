@@ -17,6 +17,7 @@ import com.maku.amalitechmakumazakpeassessment.ui.screen.Fifth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.First
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Fourth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Instagram
+import com.maku.amalitechmakumazakpeassessment.ui.screen.LazyGridScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MainScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Medidtation
 import com.maku.amalitechmakumazakpeassessment.ui.screen.MultiSelectScreen
@@ -129,6 +130,10 @@ fun MainApp(
 
                         "DeepLinks" -> navController.navigate(
                             AssessmentIVideoScreens.DeepLinksScreen.route
+                        )
+
+                        "LayGrid" -> navController.navigate(
+                            AssessmentIVideoScreens.LazyGridScreen.route
                         )
                     }
                 }
@@ -273,6 +278,12 @@ fun MainApp(
                 id = id
             )
         }
+
+        composable(
+            route = AssessmentIVideoScreens.LazyGridScreen.route
+        ) {
+            LazyGridScreen()
+        }
     }
 }
 
@@ -302,4 +313,5 @@ sealed class AssessmentIVideoScreens(val route: String) {
     object ThemeScreen : AssessmentIVideoScreens("theme_screen")
     object AnimatedCounterScreen : AssessmentIVideoScreens("animated_counter_screen")
     object DeepLinksScreen : AssessmentIVideoScreens("deep_links_screen")
+    object LazyGridScreen : AssessmentIVideoScreens("deep_grid_screen")
 }

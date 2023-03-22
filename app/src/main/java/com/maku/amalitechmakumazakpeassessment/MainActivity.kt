@@ -37,7 +37,8 @@ class MainActivity : ComponentActivity() {
                         "Permissions",
                         "Theme",
                         "AnimatedCounter",
-                        "DeepLinks"
+                        "DeepLinks",
+                        "LayGrid"
                     )
                 )
             }

@@ -9,10 +9,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.maku.amalitechmakumazakpeassessment.ui.screen.AnimatedCounterScreen
+import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.DropDown
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eight
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Eleventh
-import com.maku.amalitechmakumazakpeassessment.ui.screen.DeepLinksScreen
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Fifth
 import com.maku.amalitechmakumazakpeassessment.ui.screen.First
 import com.maku.amalitechmakumazakpeassessment.ui.screen.Fourth

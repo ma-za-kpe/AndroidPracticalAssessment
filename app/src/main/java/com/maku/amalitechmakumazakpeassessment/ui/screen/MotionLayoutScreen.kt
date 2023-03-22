@@ -30,7 +30,6 @@ import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import androidx.constraintlayout.compose.layoutId
 import com.maku.amalitechmakumazakpeassessment.R
-import com.maku.amalitechmakumazakpeassessment.ui.screen.insta.ProfileScreen
 import com.maku.amalitechmakumazakpeassessment.ui.theme.AmalitechMakuMazakpeAssessmentTheme
 
 @Composable
@@ -40,10 +39,12 @@ fun MotionLayoutScreen() {
             mutableStateOf(0f)
         }
         ProfileHeader(
-            progress = progress)
+            progress = progress
+        )
         Spacer(
             modifier = Modifier
-                .height(32.dp))
+                .height(32.dp)
+        )
         Slider(
             value = progress,
             onValueChange = {
